@@ -1,6 +1,7 @@
 import { requestAnimationFrame } from 'request-animation-frame-polyfill';
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from './consts';
-import Enemy from './Enemy';
+import EnemyPool from './EnemyPool';
+import AmmoPool from './AmmoPool';
 import Player from './Player';
 
 import './styles.css';
@@ -29,10 +30,11 @@ function animate(ctx, dynamicElements) {
 function main() {
   const ctx = createCanvas();
 
-  const dynamicElements = [
-    new Player(ctx),
-    new Enemy(ctx)
-  ];
+  const player = new Player(ctx);
+  const enemyPool = new EnemyPool(ctx, player);
+  const ammoPool = new AmmoPool(ctx, player)
+
+  const dynamicElements = [player, enemyPool, ammoPool];
 
   animate(ctx, dynamicElements);
 }

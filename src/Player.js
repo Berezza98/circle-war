@@ -7,11 +7,10 @@ export default class Player extends KeyboardHandler {
   constructor(ctx) {
     super();
 
-    this.position = new Vector(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+    this.position = new Vector(0, 0);
     this.shootVector = new Vector(0, 1);
     this.ctx = ctx;
     this.health = 100;
-    this.ammos = [];
   }
 
   get sightPosition() {
@@ -27,19 +26,14 @@ export default class Player extends KeyboardHandler {
       this.shootVector = Vector.fromAngle(this.shootVector.heading() - 0.05);
     }
 
-    if (this.keyboard.spaceActive) {
-      this.ammos.push(new Ammo(this.ctx, this.sightPosition, this.sightPosition.sub(this.position).normalize()));
-    }
-
-    this.ammos = this.ammos.filter(({ position: { x, y }, size }) => x - size < CANVAS_WIDTH && y - size < CANVAS_HEIGHT);
-    console.log(this.ammos.length);
-    this.ammos.forEach(ammo => ammo.update());
     this.draw();
   }
 
   draw() {
     const { x, y } = this.position;
     
+    this.ctx.save();
+    this.ctx.translate(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
     this.ctx.beginPath();
     this.ctx.arc(x, y, this.health, 0, 2 * Math.PI);
     this.ctx.fillStyle = 'green';
@@ -52,5 +46,6 @@ export default class Player extends KeyboardHandler {
     this.ctx.fillStyle = Ammo.color;
     this.ctx.fill();
     this.ctx.stroke();
+    this.ctx.restore();
   }
 }
