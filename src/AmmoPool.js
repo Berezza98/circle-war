@@ -39,9 +39,9 @@ export default class AmmoPool extends KeyboardHandler {
   update() {
     this.checkHit();
 
-    if (this.keyboard.spaceActive) {
-      this.addAmmo();
-    }
+    // if (this.keyboard.spaceActive) {
+    this.addAmmo();
+    // }
 
     this.pool = this.pool.filter(ammo => ammo.isActive);
 

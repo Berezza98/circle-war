@@ -4,7 +4,7 @@ export default class EnemyPool {
   constructor(ctx, player) {
     this.player = player;
     this.pool = [];
-    this.maxSize = 10;
+    this.maxSize = 8;
     this.ctx = ctx;
 
     for (let i = 0; i < this.maxSize; i++) {
@@ -18,9 +18,14 @@ export default class EnemyPool {
 
   checkCollision() {
     const { position: playerPosition, health: playerSize } = this.player;
+    const collisioned = this.pool.filter(enemy => playerPosition.sub(enemy.position).mag() <= enemy.size + playerSize);
     this.pool = this.pool.filter(enemy => {
       return !enemy.isDead && (playerPosition.sub(enemy.position).mag() > enemy.size + playerSize);
     });
+
+    if (collisioned.length > 0) {
+      this.player.hit(collisioned.length);
+    }
 
     for (let i = 0; i < this.maxSize - this.pool.length; i++) {
       this.addEnemy();

@@ -17,6 +17,12 @@ export default class Player extends KeyboardHandler {
     return this.position.add(this.shootVector.setMag(this.health));
   }
 
+  hit(value) {
+    if (this.health <= 10) return;
+
+    this.health -= value * 10;
+  }
+
   update() {
     if (this.keyboard.leftActive) {
       this.shootVector = Vector.fromAngle(this.shootVector.heading() + 0.05);
@@ -39,6 +45,12 @@ export default class Player extends KeyboardHandler {
     this.ctx.fillStyle = 'green';
     this.ctx.fill();
     this.ctx.stroke();
+
+    // health text
+    this.ctx.font = "20px serif";
+    this.ctx.fillStyle = 'black';
+    this.ctx.textAlign = 'center';
+    this.ctx.fillText(this.health, 0, 0);
 
     //scope drawing
     this.ctx.beginPath();

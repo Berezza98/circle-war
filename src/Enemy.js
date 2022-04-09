@@ -1,16 +1,18 @@
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from './consts';
-import { getRandom, getRandomFromArray } from "./helpers";
+import { getMinMax, getRandomFromArray } from "./helpers";
 import Vector from './Vector';
 
 const possibleDelay = [0, 500, 1000, 1500, 2000, 3000, 4000, 5000, 7000, 8000, 10000];
 const possibleMagnitude = [500, 600, 700, 800, 900, 1000];
-const possibleSize = [30, 40, 50, 60, 70, 80, 90, 100];
+const possibleSize = [100, 120, 130, 140, 200, 250, 300];
+const possibleColors = ['red', 'blue', 'lightblue', 'yellow', 'orange'];
 
 export default class Enemy {
   constructor(ctx) {
     this.size = getRandomFromArray(possibleSize);
     this.position = Vector.random().setMag(getRandomFromArray(possibleMagnitude));
     this.delay = getRandomFromArray(possibleDelay);
+    this.color = getRandomFromArray(possibleColors);
     this.ctx = ctx;
     this.speed = 1;
     this.hidden = true;
@@ -50,8 +52,12 @@ export default class Enemy {
     this.ctx.translate(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
     this.ctx.beginPath();
     this.ctx.arc(x, y, this.size, 0, 2 * Math.PI);
-    this.ctx.fillStyle = 'blue';
+    this.ctx.fillStyle = this.color;
     this.ctx.fill();
+    this.ctx.font = "20px serif";
+    this.ctx.fillStyle = 'black';
+    this.ctx.textAlign = 'center';
+    this.ctx.fillText(this.size, x, y);
     this.ctx.stroke();
     this.ctx.restore();
   }

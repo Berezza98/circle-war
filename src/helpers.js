@@ -13,3 +13,10 @@ export function isOnTheField({ x, y }) {
 export function getRandomFromArray(array) {
   return array[getRandom(0, array.length - 1)];
 }
+
+export function getMinMax(origMin, origMax, min, max, value) {
+  const stepsCount = max - min;
+  const origStep = (origMax - origMin) / stepsCount;
+
+  return origStep * value;
+}
