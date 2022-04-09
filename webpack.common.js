@@ -2,7 +2,9 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    app: ['core-js/stable', './src/index.js'],
+  },
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Circle war',
@@ -25,7 +27,7 @@ module.exports = {
       },
       {
         test: /\.m?js$/,
-        exclude: /(node_modules|bower_components)/,
+        // exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
           options: {
