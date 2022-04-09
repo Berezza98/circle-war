@@ -32,7 +32,7 @@ function main() {
 
   const player = new Player(ctx);
   const enemyPool = new EnemyPool(ctx, player);
-  const ammoPool = new AmmoPool(ctx, player)
+  const ammoPool = new AmmoPool(ctx, player, enemyPool)
 
   const dynamicElements = [player, enemyPool, ammoPool];
 

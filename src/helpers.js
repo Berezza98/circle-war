@@ -7,7 +7,7 @@ export function getRandom(min, max) {
 }
 
 export function isOnTheField({ x, y }) {
-  return x > 0 && x < CANVAS_WIDTH && y > 0 && y < CANVAS_HEIGHT;
+  return x > -CANVAS_WIDTH / 2 && x < CANVAS_WIDTH / 2 && y > -CANVAS_HEIGHT / 2 && y < CANVAS_HEIGHT / 2;
 }
 
 export function getRandomFromArray(array) {

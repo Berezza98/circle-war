@@ -1,4 +1,5 @@
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from "./consts";
+import { isOnTheField } from "./helpers";
 
 export default class Ammo {
   constructor(ctx, playerPosition, sightPosition) {
@@ -8,10 +9,19 @@ export default class Ammo {
     this.size = 5;
     this.active = false;
     this.ctx = ctx;
+    this.active = true;
   }
 
   static size = 5;
   static color = 'red';
+
+  get isActive() {
+    return isOnTheField(this.position) && this.active;
+  }
+
+  remove() {
+    this.active = false;
+  }
 
   update() {
     this.position = this.position.add(this.vel.mult(1));

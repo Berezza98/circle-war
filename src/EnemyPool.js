@@ -18,8 +18,8 @@ export default class EnemyPool {
 
   checkCollision() {
     const { position: playerPosition, health: playerSize } = this.player;
-    this.pool = this.pool.filter(({ position: enemyPosition, size: enemySize }) => {
-      return playerPosition.sub(enemyPosition).mag() > enemySize + playerSize;
+    this.pool = this.pool.filter(enemy => {
+      return !enemy.isDead && (playerPosition.sub(enemy.position).mag() > enemy.size + playerSize);
     });
 
     for (let i = 0; i < this.maxSize - this.pool.length; i++) {

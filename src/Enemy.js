@@ -4,7 +4,7 @@ import Vector from './Vector';
 
 const possibleDelay = [0, 500, 1000, 1500, 2000, 3000, 4000, 5000, 7000, 8000, 10000];
 const possibleMagnitude = [500, 600, 700, 800, 900, 1000];
-const possibleSize = [20, 30, 40, 50, 60, 70, 80, 90, 10];
+const possibleSize = [30, 40, 50, 60, 70, 80, 90, 100];
 
 export default class Enemy {
   constructor(ctx) {
@@ -20,9 +20,19 @@ export default class Enemy {
     }, this.delay);
   }
 
+  get isDead() {
+    return this.size <= 20;
+  }
+
   get vel() {
     const centerVector = new Vector(0, 0);
     return centerVector.sub(this.position).normalize().mult(this.speed);
+  }
+
+  hit() {
+    if (this.isDead) return;
+
+    this.size -= 10;
   }
 
   update() {
