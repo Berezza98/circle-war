@@ -13,7 +13,6 @@ export default class Score {
   }
 
   draw() {
-    console.log(this.ctx.canvas.width);
     this.ctx.save();
     this.ctx.translate(this.ctx.canvas.width - 70, 30);
     this.ctx.font = "bold 20px serif";

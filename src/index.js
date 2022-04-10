@@ -8,15 +8,11 @@ import './styles.css';
 import Score from './Score';
 
 function createCanvas() {
-  const wrapper = document.createElement('div');
   const canvas = document.createElement('canvas');
   canvas.height = CANVAS_HEIGHT;
   canvas.width = CANVAS_WIDTH;
 
-  wrapper.classList.add('wrapper');
-
-  wrapper.appendChild(canvas)
-  document.body.appendChild(wrapper);
+  document.body.appendChild(canvas);
 
   return canvas.getContext('2d');
 }
