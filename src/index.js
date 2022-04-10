@@ -16,7 +16,7 @@ function createCanvas() {
   wrapper.classList.add('wrapper');
 
   wrapper.appendChild(canvas)
-  document.documentElement.appendChild(wrapper);
+  document.body.appendChild(wrapper);
 
   return canvas.getContext('2d');
 }

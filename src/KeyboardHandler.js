@@ -69,24 +69,20 @@ export default class KeyboardHandler {
       }
     });
 
-    this.canvas.addEventListener('mousemove', ({ offsetX, offsetY }) => {
+    window.addEventListener('touchmove', (e) => {
       if (this.disableTouch) return;
 
-      this.touch.x = offsetX;
-      this.touch.y = offsetY;
+      const { pageY, pageX } = e.changedTouches[0];
+
+      this.touch.x = pageX;
+      this.touch.y = pageY;
     });
 
-    this.canvas.addEventListener('mousedown', () => {
+    window.addEventListener('touchstart', () => {
       this.disableTouch = false;
     });
 
-    this.canvas.addEventListener('mouseup', () => {
-      this.disableTouch = true;
-      this.touch.x = 0;
-      this.touch.y = 0;
-    });
-
-    this.canvas.addEventListener('mouseleave', () => {
+    window.addEventListener('touchend', () => {
       this.disableTouch = true;
       this.touch.x = 0;
       this.touch.y = 0;

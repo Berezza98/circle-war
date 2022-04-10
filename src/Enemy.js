@@ -2,14 +2,14 @@ import { getMinMax, getRandomFromArray } from "./helpers";
 import Vector from './Vector';
 
 const possibleDelay = [0, 500, 1000, 1500, 2000, 3000, 4000, 5000, 7000, 8000, 10000];
-const possibleMagnitude = [500, 600, 700, 800, 900, 1000];
+const possibleMagnitude = [100, 200, 250, 300, 350, 400];
 const possibleSize = [100, 120, 130, 140, 200, 250, 300];
 const possibleColors = ['red', 'blue', 'lightblue', 'yellow', 'orange'];
 
 export default class Enemy {
   constructor(ctx) {
     this.size = getRandomFromArray(possibleSize);
-    this.position = Vector.random().setMag(getRandomFromArray(possibleMagnitude));
+    this.position = Vector.random().setMag(ctx.canvas.clientWidth / 2 + getRandomFromArray(possibleMagnitude));
     this.delay = getRandomFromArray(possibleDelay);
     this.color = getRandomFromArray(possibleColors);
     this.ctx = ctx;

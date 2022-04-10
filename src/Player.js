@@ -33,8 +33,8 @@ export default class Player extends KeyboardHandler {
     }
 
     if (this.touch.x !== 0) {
-      const { width, height } = this.ctx.canvas;
-      this.shootVector = Vector.fromAngle(this.shootVector.heading() - getMinMax(-0.1, 0.1, -width / 2, width / 2, this.touch.x - width / 2));
+      const { clientWidth: canvasWidth } = this.ctx.canvas;
+      this.shootVector = Vector.fromAngle(this.shootVector.heading() - getMinMax(0.05, -0.05, -canvasWidth / 2, canvasWidth / 2, this.touch.x - canvasWidth / 2));
     }
 
     this.draw();
