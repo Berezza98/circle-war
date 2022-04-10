@@ -25,11 +25,11 @@ export default class Player extends KeyboardHandler {
 
   update() {
     if (this.keyboard.leftActive) {
-      this.shootVector = Vector.fromAngle(this.shootVector.heading() + 0.05);
+      this.shootVector = Vector.fromAngle(this.shootVector.heading() - 0.05);
     }
 
     if (this.keyboard.rightActive) {
-      this.shootVector = Vector.fromAngle(this.shootVector.heading() - 0.05);
+      this.shootVector = Vector.fromAngle(this.shootVector.heading() + 0.05);
     }
 
     if (this.touch.x !== 0) {
