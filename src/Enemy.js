@@ -16,6 +16,7 @@ export default class Enemy {
     this.ctx = ctx;
     this.speed = 1;
     this.hidden = true;
+    this.deadSize = 20;
     
     setTimeout(() => {
       this.hidden = false;
@@ -23,7 +24,7 @@ export default class Enemy {
   }
 
   get isDead() {
-    return this.size <= 20;
+    return this.size <= this.deadSize;
   }
 
   get vel() {
@@ -57,7 +58,7 @@ export default class Enemy {
     this.ctx.font = "20px serif";
     this.ctx.fillStyle = 'black';
     this.ctx.textAlign = 'center';
-    this.ctx.fillText(this.size, x, y);
+    this.ctx.fillText(this.size - this.deadSize, x, y);
     this.ctx.stroke();
     this.ctx.restore();
   }

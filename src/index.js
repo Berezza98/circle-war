@@ -5,6 +5,7 @@ import AmmoPool from './AmmoPool';
 import Player from './Player';
 
 import './styles.css';
+import Score from './Score';
 
 function createCanvas() {
   const wrapper = document.createElement('div');
@@ -30,11 +31,12 @@ function animate(ctx, dynamicElements) {
 function main() {
   const ctx = createCanvas();
 
+  const score = new Score(ctx);
   const player = new Player(ctx);
-  const enemyPool = new EnemyPool(ctx, player);
-  const ammoPool = new AmmoPool(ctx, player, enemyPool)
+  const enemyPool = new EnemyPool(ctx, player, score);
+  const ammoPool = new AmmoPool(ctx, player, enemyPool);
 
-  const dynamicElements = [player, enemyPool, ammoPool];
+  const dynamicElements = [player, enemyPool, ammoPool, score];
 
   animate(ctx, dynamicElements);
 }
