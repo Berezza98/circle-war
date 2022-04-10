@@ -4,7 +4,7 @@ export default class EnemyPool {
   constructor(ctx, player, score) {
     this.player = player;
     this.pool = [];
-    this.maxSize = 8;
+    this.maxSize = 5;
     this.score = score;
     this.ctx = ctx;
 

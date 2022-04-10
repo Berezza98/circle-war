@@ -1,12 +1,21 @@
 export default class KeyboardHandler {
-  constructor() {
+  constructor(ctx) {
+    this.ctx = ctx;
+    this.canvas = ctx.canvas;
+    this.disableTouch = true;
+
     this.keyboard = {
       upActive: false,
       downActive: false,
       leftActive: false,
       rightActive: false,
       spaceActive: false,
-    }
+    };
+
+    this.touch = {
+      x: 0,
+      y: 0
+    };
 
     this.addListeners();
   }
@@ -35,6 +44,7 @@ export default class KeyboardHandler {
           break;
       }
     });
+
     window.addEventListener('keyup', (e) => {
       switch (e.keyCode) {
         case 38:
@@ -57,6 +67,29 @@ export default class KeyboardHandler {
           this.keyboard.spaceActive = false;
           break;
       }
+    });
+
+    this.canvas.addEventListener('mousemove', ({ offsetX, offsetY }) => {
+      if (this.disableTouch) return;
+
+      this.touch.x = offsetX;
+      this.touch.y = offsetY;
+    });
+
+    this.canvas.addEventListener('mousedown', () => {
+      this.disableTouch = false;
+    });
+
+    this.canvas.addEventListener('mouseup', () => {
+      this.disableTouch = true;
+      this.touch.x = 0;
+      this.touch.y = 0;
+    });
+
+    this.canvas.addEventListener('mouseleave', () => {
+      this.disableTouch = true;
+      this.touch.x = 0;
+      this.touch.y = 0;
     });
   }
 }

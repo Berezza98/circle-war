@@ -1,4 +1,3 @@
-import { CANVAS_HEIGHT, CANVAS_WIDTH } from "./consts";
 import { isOnTheField } from "./helpers";
 
 export default class Ammo {
@@ -32,7 +31,7 @@ export default class Ammo {
     const { x, y } = this.position;
 
     this.ctx.save();
-    this.ctx.translate(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+    this.ctx.translate(this.ctx.canvas.width / 2, this.ctx.canvas.height / 2);
     this.ctx.beginPath();
     this.ctx.arc(x, y, Ammo.size, 0, 2 * Math.PI);
     this.ctx.fillStyle = Ammo.color;

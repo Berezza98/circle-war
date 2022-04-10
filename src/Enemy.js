@@ -1,4 +1,3 @@
-import { CANVAS_HEIGHT, CANVAS_WIDTH } from './consts';
 import { getMinMax, getRandomFromArray } from "./helpers";
 import Vector from './Vector';
 
@@ -50,7 +49,7 @@ export default class Enemy {
     const { x, y } = this.position;
 
     this.ctx.save();
-    this.ctx.translate(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+    this.ctx.translate(this.ctx.canvas.width / 2, this.ctx.canvas.height / 2);
     this.ctx.beginPath();
     this.ctx.arc(x, y, this.size, 0, 2 * Math.PI);
     this.ctx.fillStyle = this.color;

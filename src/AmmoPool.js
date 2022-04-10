@@ -3,7 +3,7 @@ import KeyboardHandler from "./KeyboardHandler";
 
 export default class AmmoPool extends KeyboardHandler {
   constructor(ctx, player, enemies) {
-    super();
+    super(ctx);
 
     this.player = player;
     this.enemies = enemies;

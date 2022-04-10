@@ -1,5 +1,3 @@
-import { CANVAS_WIDTH } from './consts';
-
 export default class Score {
   constructor(ctx) {
     this.points = 0;
@@ -16,7 +14,7 @@ export default class Score {
 
   draw() {
     this.ctx.save();
-    this.ctx.translate(CANVAS_WIDTH - 70, 30);
+    this.ctx.translate(this.ctx.canvas.width - 70, 30);
     this.ctx.font = "bold 20px serif";
     this.ctx.fillStyle = 'black';
     this.ctx.textAlign = 'center';

@@ -1,11 +1,11 @@
 import Vector from './Vector';
 import Ammo from './Ammo';
 import KeyboardHandler from './KeyboardHandler';
-import { CANVAS_HEIGHT, CANVAS_WIDTH } from './consts';
+import { getMinMax } from './helpers';
 
 export default class Player extends KeyboardHandler {
   constructor(ctx) {
-    super();
+    super(ctx);
 
     this.position = new Vector(0, 0);
     this.shootVector = new Vector(0, 1);
@@ -32,6 +32,11 @@ export default class Player extends KeyboardHandler {
       this.shootVector = Vector.fromAngle(this.shootVector.heading() - 0.05);
     }
 
+    if (this.touch.x !== 0) {
+      const { width, height } = this.ctx.canvas;
+      this.shootVector = Vector.fromAngle(this.shootVector.heading() - getMinMax(-0.1, 0.1, -width / 2, width / 2, this.touch.x - width / 2));
+    }
+
     this.draw();
   }
 
@@ -39,7 +44,7 @@ export default class Player extends KeyboardHandler {
     const { x, y } = this.position;
     
     this.ctx.save();
-    this.ctx.translate(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+    this.ctx.translate(this.ctx.canvas.width / 2, this.ctx.canvas.height / 2);
     this.ctx.beginPath();
     this.ctx.arc(x, y, this.health, 0, 2 * Math.PI);
     this.ctx.fillStyle = 'green';
