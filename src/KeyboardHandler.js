@@ -10,6 +10,10 @@ export default class KeyboardHandler {
       leftActive: false,
       rightActive: false,
       spaceActive: false,
+      wActive: false,
+      sActive: false,
+      aActive: false,
+      dActive: false,
     };
 
     this.touch = {
@@ -36,11 +40,23 @@ export default class KeyboardHandler {
           this.keyboard.leftActive = true;
           break;
         case 39:
-        case 35:
+        case 5:
           this.keyboard.rightActive = true;
           break;
         case 32:
           this.keyboard.spaceActive = true;
+          break;
+        case 87:
+          this.keyboard.wActive = true;
+          break;
+        case 83:
+          this.keyboard.sActive = true;
+          break;
+        case 65:
+          this.keyboard.aActive = true;
+          break;
+        case 68:
+          this.keyboard.dActive = true;
           break;
       }
     });
@@ -60,11 +76,23 @@ export default class KeyboardHandler {
           this.keyboard.leftActive = false;
           break;
         case 39:
-        case 35:
+        case 5:
           this.keyboard.rightActive = false;
           break;
         case 32:
           this.keyboard.spaceActive = false;
+          break;
+        case 87:
+          this.keyboard.wActive = false;
+          break;
+        case 83:
+          this.keyboard.sActive = false;
+          break;
+        case 65:
+          this.keyboard.aActive = false;
+          break;
+        case 68:
+          this.keyboard.dActive = false;
           break;
       }
     });

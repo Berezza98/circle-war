@@ -9,6 +9,7 @@ export default class Player extends KeyboardHandler {
 
     this.position = new Vector(this.ctx.canvas.width / 2, this.ctx.canvas.height / 2);
     this.shootVector = new Vector(0, 1);
+    this.vel = new Vector(0, 0);
     this.ctx = ctx;
     this.health = 100;
   }
@@ -23,6 +24,10 @@ export default class Player extends KeyboardHandler {
     this.health -= value * 10;
   }
 
+  frictionForce() {
+    this.vel = this.vel.mult(0.9);
+  }
+
   update() {
     if (this.keyboard.leftActive) {
       this.shootVector = Vector.fromAngle(this.shootVector.heading() - 0.05);
@@ -32,11 +37,29 @@ export default class Player extends KeyboardHandler {
       this.shootVector = Vector.fromAngle(this.shootVector.heading() + 0.05);
     }
 
+    if (this.keyboard.aActive) {
+      this.vel = this.vel.add(new Vector(-1, 0));
+    }
+
+    if (this.keyboard.dActive) {
+      this.vel = this.vel.add(new Vector(1, 0));
+    }
+
+    if (this.keyboard.wActive) {
+      this.vel = this.vel.add(new Vector(0, -1));
+    }
+
+    if (this.keyboard.sActive) {
+      this.vel = this.vel.add(new Vector(0, 1));
+    }
+
     if (this.touch.x !== 0) {
       const { clientWidth: canvasWidth } = this.ctx.canvas;
       this.shootVector = Vector.fromAngle(this.shootVector.heading() - getMinMax(0.05, -0.05, -canvasWidth / 2, canvasWidth / 2, this.touch.x - canvasWidth / 2));
     }
 
+    this.frictionForce();
+    this.position = this.position.add(this.vel).setMinLimit(new Vector(this.health, this.health)).setMaxLimit(new Vector(this.ctx.canvas.width - this.health, this.ctx.canvas.height - this.health));
     this.draw();
   }
 
@@ -55,7 +78,7 @@ export default class Player extends KeyboardHandler {
     this.ctx.font = "20px serif";
     this.ctx.fillStyle = 'black';
     this.ctx.textAlign = 'center';
-    this.ctx.fillText(this.health, 0, 0);
+    this.ctx.fillText(this.health, x, y);
 
     //scope drawing
     this.ctx.beginPath();
