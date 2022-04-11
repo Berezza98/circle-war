@@ -7,9 +7,10 @@ const possibleSize = [100, 120, 130, 140, 200, 250, 300];
 const possibleColors = ['red', 'blue', 'lightblue', 'yellow', 'orange'];
 
 export default class Enemy {
-  constructor(ctx) {
+  constructor(ctx, player) {
+    this.player = player;
     this.size = getRandomFromArray(possibleSize);
-    this.position = Vector.random().setMag(ctx.canvas.clientWidth / 2 + getRandomFromArray(possibleMagnitude));
+    this.position = this.player.position.add(Vector.random().setMag(ctx.canvas.clientWidth / 2 + getRandomFromArray(possibleMagnitude)));
     this.delay = getRandomFromArray(possibleDelay);
     this.color = getRandomFromArray(possibleColors);
     this.ctx = ctx;
@@ -27,8 +28,7 @@ export default class Enemy {
   }
 
   get vel() {
-    const centerVector = new Vector(0, 0);
-    return centerVector.sub(this.position).normalize().mult(this.speed);
+    return this.player.position.sub(this.position).normalize().mult(this.speed);
   }
 
   hit() {
@@ -49,7 +49,7 @@ export default class Enemy {
     const { x, y } = this.position;
 
     this.ctx.save();
-    this.ctx.translate(this.ctx.canvas.width / 2, this.ctx.canvas.height / 2);
+    // this.ctx.translate(this.ctx.canvas.width / 2, this.ctx.canvas.height / 2);
     this.ctx.beginPath();
     this.ctx.arc(x, y, this.size, 0, 2 * Math.PI);
     this.ctx.fillStyle = this.color;

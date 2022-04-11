@@ -23,7 +23,7 @@ export default class Ammo {
   }
 
   update() {
-    this.position = this.position.add(this.vel.mult(1));
+    this.position = this.position.add(this.vel);
     this.draw();
   }
 
@@ -31,7 +31,7 @@ export default class Ammo {
     const { x, y } = this.position;
 
     this.ctx.save();
-    this.ctx.translate(this.ctx.canvas.width / 2, this.ctx.canvas.height / 2);
+    // this.ctx.translate(this.ctx.canvas.width / 2, this.ctx.canvas.height / 2);
     this.ctx.beginPath();
     this.ctx.arc(x, y, Ammo.size, 0, 2 * Math.PI);
     this.ctx.fillStyle = Ammo.color;

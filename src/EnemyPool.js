@@ -4,7 +4,7 @@ export default class EnemyPool {
   constructor(ctx, player, score) {
     this.player = player;
     this.pool = [];
-    this.maxSize = 5;
+    this.maxSize = 4;
     this.score = score;
     this.ctx = ctx;
 
@@ -14,7 +14,7 @@ export default class EnemyPool {
   }
 
   addEnemy() {
-    this.pool.push(new Enemy(this.ctx));
+    this.pool.push(new Enemy(this.ctx, this.player));
   }
 
   checkCollision() {

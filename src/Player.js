@@ -7,7 +7,7 @@ export default class Player extends KeyboardHandler {
   constructor(ctx) {
     super(ctx);
 
-    this.position = new Vector(0, 0);
+    this.position = new Vector(this.ctx.canvas.width / 2, this.ctx.canvas.height / 2);
     this.shootVector = new Vector(0, 1);
     this.ctx = ctx;
     this.health = 100;
@@ -44,7 +44,7 @@ export default class Player extends KeyboardHandler {
     const { x, y } = this.position;
     
     this.ctx.save();
-    this.ctx.translate(this.ctx.canvas.width / 2, this.ctx.canvas.height / 2);
+    // this.ctx.translate();
     this.ctx.beginPath();
     this.ctx.arc(x, y, this.health, 0, 2 * Math.PI);
     this.ctx.fillStyle = 'green';
