@@ -16,6 +16,11 @@ export default class Vector {
     return new Vector(Math.cos(angle), Math.sin(angle));
   }
 
+  clone() {
+    const { x, y } = this;
+    return new Vector(x, y);
+  }
+
   add(vector2) {
     const { x, y } = vector2;
 
@@ -75,5 +80,13 @@ export default class Vector {
     const maxY = this.y <= x ? this.y : y;
 
     return new Vector(maxX, maxY);
+  }
+
+  limit(value) {
+    if (this.mag() > value) {
+      return this.setMag(value);
+    }
+
+    return this.clone();
   }
 }

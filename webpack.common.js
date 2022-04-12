@@ -8,6 +8,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Circle war',
+      template: './src/index.html'
     }),
   ],
   output: {

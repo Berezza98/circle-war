@@ -1,10 +1,10 @@
 import Vector from './Vector';
 import Ammo from './Ammo';
 import KeyboardHandler from './KeyboardHandler';
-import { getMinMax } from './helpers';
+import { getMinMax, isMobile } from './helpers';
 
 export default class Player extends KeyboardHandler {
-  constructor(ctx) {
+  constructor(ctx, joystickLeft, joystickRight) {
     super(ctx);
 
     this.position = new Vector(this.ctx.canvas.width / 2, this.ctx.canvas.height / 2);
@@ -12,6 +12,8 @@ export default class Player extends KeyboardHandler {
     this.vel = new Vector(0, 0);
     this.ctx = ctx;
     this.health = 100;
+    this.joystickLeft = joystickLeft;
+    this.joystickRight = joystickRight;
   }
 
   get sightPosition() {
@@ -53,9 +55,9 @@ export default class Player extends KeyboardHandler {
       this.vel = this.vel.add(new Vector(0, 1));
     }
 
-    if (this.touch.x !== 0) {
-      const { clientWidth: canvasWidth } = this.ctx.canvas;
-      this.shootVector = Vector.fromAngle(this.shootVector.heading() - getMinMax(0.05, -0.05, -canvasWidth / 2, canvasWidth / 2, this.touch.x - canvasWidth / 2));
+    if (isMobile.any()) {
+      this.vel = this.vel.add(this.joystickLeft.data);
+      this.shootVector = Vector.fromAngle(this.joystickRight.data.heading());
     }
 
     this.frictionForce();
