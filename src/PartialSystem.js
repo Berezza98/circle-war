@@ -1,9 +1,8 @@
 import Partial from "./Partial";
 
 export default class PartialSystem {
-  constructor(ctx, pos, options = {}) {
+  constructor(ctx, options = {}) {
     this.ctx = ctx;
-    this.position = pos;
     this.options = options;
     this.partials = [];
 
@@ -11,8 +10,8 @@ export default class PartialSystem {
   }
 
   init() {
-    for (let i = 0; i < 5; i++) {
-      this.partials.push(new Partial(this.ctx, this.position, this.options));
+    for (let i = 0; i < (this.options.partialCount || 5); i++) {
+      this.partials.push(new Partial(this.ctx, this.options));
     }
   }
 

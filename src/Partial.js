@@ -2,12 +2,12 @@ import { getRandom } from "./helpers";
 import Vector from "./Vector";
 
 export default class Partial {
-  constructor(ctx, pos, options = {}) {
+  constructor(ctx, options = {}) {
     this.ctx = ctx;
     this.options = options;
     this.size = getRandom(10, 50);
-    this.position = pos.add(Vector.random().mult(options.offset || getRandom(1, 5)));
-    this.dir = this.position.sub(pos).normalize();
+    this.position = options.pos.add(Vector.random().mult(options.offset || getRandom(1, 5)));
+    this.dir = this.position.sub(options.pos).normalize();
 
     this.colorAngle = 0;
   }

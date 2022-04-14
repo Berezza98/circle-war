@@ -40,10 +40,11 @@ export default class Enemy {
 
     const options = {
       color: this.color,
-      offset: this.size
+      offset: this.size,
+      pos: this.position,
     };
 
-    this.partialSystems.push(new PartialSystem(this.ctx, this.position, options));
+    this.partialSystems.push(new PartialSystem(this.ctx, options));
   }
 
   update() {

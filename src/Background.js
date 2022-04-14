@@ -1,3 +1,5 @@
+import { CANVAS_HEIGHT, CANVAS_WIDTH } from "./consts";
+import { getRandom } from "./helpers";
 import InputHandler from "./InputHandler";
 import PartialSystem from "./PartialSystem";
 import Vector from "./Vector";
@@ -7,21 +9,28 @@ export default class Background extends InputHandler {
     super(ctx);
  
     this.ctx = ctx;
-    this.counter = 0;
-    this.partialSystems = [];
+    this.starLength = 400;
+    this.stars = [];
+
+    this.init();
+  }
+
+  init() {
+    for (let i = 0; i < this.starLength; i++) {
+      this.stars.push(new Star(this.ctx));
+    }
   }
 
   update() {
-    this.counter++;
-    
-    this.partialSystems = this.partialSystems.filter(ps => ps.partials.length > 0);
+    this.stars = this.stars.filter(star => star.isAlive);
 
-    if (this.mouse.isMoving) {
-      const { x, y } = this.mouse;
-      this.partialSystems.push(new PartialSystem(this.ctx, new Vector(x, y)));
+    for (let i = 0; i < this.starLength - this.stars.length; i++) {
+      this.stars.push(new Star(this.ctx));
     }
 
     this.draw();
+
+    this.stars.forEach(star => star.update());
   }
 
   draw() {
@@ -30,12 +39,35 @@ export default class Background extends InputHandler {
     this.ctx.beginPath();
     this.ctx.fillStyle = 'black';
     this.ctx.fillRect(0, 0, width, height);
-
-    this.partialSystems.forEach(ps => ps.update());
-    // this.ctx.fillStyle = 'red';
-    // this.ctx.arc(this.mouse.x, this.mouse.y, 20, 0, 2 * Math.PI);
-    // this.ctx.fill();
-    // this.ctx.stroke();
     this.ctx.restore();
+  }
+}
+
+class Star {
+  constructor(ctx) {
+    this.ctx = ctx;
+    this.position = new Vector(getRandom(0, CANVAS_WIDTH), getRandom(0, CANVAS_HEIGHT));
+    this.live = getRandom(100, 1000);
+    this.size = getRandom(1, 4);
+  }
+
+  get isAlive() {
+    return this.live > 0;
+  }
+
+  update() {
+    this.live -= 1;
+    console.log(this.live);
+    this.draw();
+  }
+
+  draw() {
+    const { x, y } = this.position;
+
+    this.ctx.fillStyle = 'white';
+    this.ctx.beginPath();
+    this.ctx.arc(x, y, this.size, 0, 2 * Math.PI);
+    this.ctx.fill();
+    this.ctx.stroke();
   }
 }
