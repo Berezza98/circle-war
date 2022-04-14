@@ -14,13 +14,18 @@ body {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  position: relative;
 }
 
 canvas {
   display: block;
-  background-color: lightgray;
 }
 
 .joystick {
   background-color: transparent;
+}
+
+.bg {
+  position: absolute;
+  z-index: -1;
 }

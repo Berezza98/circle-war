@@ -8,22 +8,27 @@ import { isMobile } from './helpers';
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from './consts';
 
 import './styles.css';
+import Background from './Background';
 
-function createCanvas() {
+function createCanvas(className) {
   const canvas = document.createElement('canvas');
   canvas.height = CANVAS_HEIGHT;
   canvas.width = CANVAS_WIDTH;
+
+  if (className) {
+    canvas.classList.add(className);
+  }
 
   document.body.appendChild(canvas);
 
   return canvas.getContext('2d');
 }
 
-function animate(ctx, dynamicElements) {
-  ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+function animate(ctxs, dynamicElements) {
+  ctxs.forEach(ctx => ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT));
   dynamicElements.forEach(el => el.update());
 
-  requestAnimationFrame(() => animate(ctx, dynamicElements));
+  requestAnimationFrame(() => animate(ctxs, dynamicElements));
 }
 
 function main() {
@@ -32,19 +37,21 @@ function main() {
   if (isMobile.any()) {
     joystickLeft = new Joystick({ className: 'joystick', size: 200 }).append(document.body);
   }
+  const bgCtx = createCanvas('bg');
   const ctx = createCanvas();
   if (isMobile.any()) {
     joystickRight = new Joystick({ className: 'joystick', size: 200 }).append(document.body);
   }
 
+  const background = new Background(bgCtx);
   const score = new Score(ctx);
   const player = new Player(ctx, joystickLeft, joystickRight);
   const enemyPool = new EnemyPool(ctx, player, score);
   const ammoPool = new AmmoPool(ctx, player, enemyPool);
 
-  const dynamicElements = [player, enemyPool, ammoPool, score];
+  const dynamicElements = [background, player, enemyPool, ammoPool, score];
 
-  animate(ctx, dynamicElements);
+  animate([bgCtx, ctx], dynamicElements);
 }
 
 main();

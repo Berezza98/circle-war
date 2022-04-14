@@ -1,7 +1,7 @@
 import Ammo from "./Ammo";
-import KeyboardHandler from "./KeyboardHandler";
+import InputHandler from "./InputHandler";
 
-export default class AmmoPool extends KeyboardHandler {
+export default class AmmoPool extends InputHandler {
   constructor(ctx, player, enemies) {
     super(ctx);
 

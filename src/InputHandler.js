@@ -1,8 +1,9 @@
-export default class KeyboardHandler {
+export default class InputHandler {
+  #movingTimer = null;
+
   constructor(ctx) {
     this.ctx = ctx;
     this.canvas = ctx.canvas;
-    this.disableTouch = true;
 
     this.keyboard = {
       upActive: false,
@@ -14,6 +15,12 @@ export default class KeyboardHandler {
       sActive: false,
       aActive: false,
       dActive: false,
+    };
+
+    this.mouse = {
+      x: 0,
+      y: 0,
+      isMoving: false,
     };
 
     this.touch = {
@@ -98,22 +105,39 @@ export default class KeyboardHandler {
     });
 
     window.addEventListener('touchmove', (e) => {
-      if (this.disableTouch) return;
-
       const { pageY, pageX } = e.changedTouches[0];
 
       this.touch.x = pageX;
       this.touch.y = pageY;
     });
 
-    window.addEventListener('touchstart', () => {
-      this.disableTouch = false;
-    });
-
     window.addEventListener('touchend', () => {
-      this.disableTouch = true;
       this.touch.x = 0;
       this.touch.y = 0;
+    });
+
+    window.addEventListener('mouseenter', ({ clientX, clientY }) => {
+      this.mouse.x = clientX;
+      this.mouse.y = clientY;
+    });
+
+    window.addEventListener('mousemove', ({ offsetX, offsetY }) => {
+      if (this.#movingTimer) {
+        clearTimeout(this.#movingTimer);
+      }
+
+      this.mouse.isMoving = true;
+      this.mouse.x = offsetX;
+      this.mouse.y = offsetY;
+      this.#movingTimer = setTimeout(() => {
+        this.mouse.isMoving = false;
+        this.#movingTimer = null;
+      }, 200);
+    });
+
+    window.addEventListener('mouseleave', () => {
+      this.mouse.x = 0;
+      this.mouse.y = 0;
     });
   }
 }

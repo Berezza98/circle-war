@@ -1,9 +1,9 @@
 import Vector from './Vector';
 import Ammo from './Ammo';
-import KeyboardHandler from './KeyboardHandler';
+import InputHandler from './InputHandler';
 import { getMinMax, isMobile } from './helpers';
 
-export default class Player extends KeyboardHandler {
+export default class Player extends InputHandler {
   constructor(ctx, joystickLeft, joystickRight) {
     super(ctx);
 
