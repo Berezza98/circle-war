@@ -1,4 +1,5 @@
 import { getMinMax, getRandomFromArray } from "./helpers";
+import PartialSystem from "./PartialSystem";
 import Vector from './Vector';
 
 const possibleDelay = [0, 500, 1000, 1500, 2000, 3000, 4000, 5000, 7000, 8000, 10000];
@@ -17,6 +18,7 @@ export default class Enemy {
     this.speed = 1;
     this.hidden = true;
     this.deadSize = 20;
+    this.partialSystems = [];
     
     setTimeout(() => {
       this.hidden = false;
@@ -35,13 +37,21 @@ export default class Enemy {
     if (this.isDead) return;
 
     this.size -= 10;
+
+    const options = {
+      color: this.color,
+      offset: this.size
+    };
+
+    this.partialSystems.push(new PartialSystem(this.ctx, this.position, options));
   }
 
   update() {
     if (this.hidden) return;
  
     this.position = this.position.add(this.vel);
-  
+
+    this.partialSystems.forEach(ps => ps.update());
     this.draw();
   }
 
@@ -49,7 +59,6 @@ export default class Enemy {
     const { x, y } = this.position;
 
     this.ctx.save();
-    // this.ctx.translate(this.ctx.canvas.width / 2, this.ctx.canvas.height / 2);
     this.ctx.beginPath();
     this.ctx.arc(x, y, this.size, 0, 2 * Math.PI);
     this.ctx.fillStyle = this.color;
