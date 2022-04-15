@@ -16,7 +16,7 @@ export default class Score {
     this.ctx.save();
     this.ctx.translate(this.ctx.canvas.width - 70, 30);
     this.ctx.font = "bold 20px serif";
-    this.ctx.fillStyle = 'black';
+    this.ctx.fillStyle = 'white';
     this.ctx.textAlign = 'center';
     this.ctx.fillText('Score: ' + this.points, 0, 0);
     this.ctx.restore();

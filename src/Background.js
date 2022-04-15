@@ -9,7 +9,7 @@ export default class Background extends InputHandler {
     super(ctx);
  
     this.ctx = ctx;
-    this.starLength = 400;
+    this.starLength = 200;
     this.stars = [];
 
     this.init();
@@ -57,7 +57,7 @@ class Star {
 
   update() {
     this.live -= 1;
-    console.log(this.live);
+
     this.draw();
   }
 
