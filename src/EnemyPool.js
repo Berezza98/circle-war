@@ -1,12 +1,12 @@
 import Enemy from "./Enemy";
 
 export default class EnemyPool {
-  constructor(ctx, player, score) {
-    this.player = player;
+  constructor(game) {
+    this.ctx = game.ctx;
+    this.player = game.player;
+    this.score = game.score;
     this.pool = [];
     this.maxSize = 5;
-    this.score = score;
-    this.ctx = ctx;
 
     for (let i = 0; i < this.maxSize; i++) {
       this.addEnemy();

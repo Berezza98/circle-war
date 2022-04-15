@@ -3,18 +3,20 @@ import Ammo from './Ammo';
 import InputHandler from './InputHandler';
 import { isMobile } from './helpers';
 import { CANVAS_HEIGHT, CANVAS_WIDTH, PERCENT_WIDTH } from './consts';
+import Menu from './Menu';
 
 export default class Player extends InputHandler {
-  constructor(ctx, joystickLeft, joystickRight) {
-    super(ctx);
+  constructor(game) {
+    super(game.ctx);
 
+    this.ctx = game.ctx;
+    this.game = game;
     this.position = new Vector(this.ctx.canvas.width / 2, this.ctx.canvas.height / 2);
     this.shootVector = new Vector(0, 1);
     this.vel = new Vector(0, 0);
-    this.ctx = ctx;
     this.health = 100;
-    this.joystickLeft = joystickLeft;
-    this.joystickRight = joystickRight;
+    this.joystickLeft = game.joystickLeft;
+    this.joystickRight = game.joystickRight;
   }
 
   get sightPosition() {
@@ -26,7 +28,9 @@ export default class Player extends InputHandler {
   }
 
   hit(value) {
-    if (this.health <= 10) return;
+    if (this.health <= 10) {
+      return this.game.stop();
+    }
 
     this.health -= value * 10;
   }

@@ -1,9 +1,9 @@
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from "./consts";
 
 export default class Score {
-  constructor(ctx) {
+  constructor(game) {
     this.points = 0;
-    this.ctx = ctx;
+    this.ctx = game.ctx;
   }
 
   increase() {

@@ -21,6 +21,29 @@ export function getMinMax(origMin, origMax, min, max, value) {
   return origStep * value;
 }
 
+export function createCanvas(className) {
+  const canvas = document.createElement('canvas');
+  canvas.height = CANVAS_HEIGHT;
+  canvas.width = CANVAS_WIDTH;
+
+  if (className) {
+    canvas.classList.add(className);
+  }
+
+  document.body.appendChild(canvas);
+
+  return canvas.getContext('2d');
+}
+
+export function createEl(elName, classList) {
+  const el = document.createElement(elName);
+  const classNames = Array.isArray(classList) ? classList : [classList];
+
+  el.classList.add(...classNames);
+
+  return el;
+}
+
 export const isMobile = {
   Android: function() {
       return navigator.userAgent.match(/Android/i);

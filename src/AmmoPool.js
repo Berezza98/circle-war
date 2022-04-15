@@ -2,13 +2,13 @@ import Ammo from "./Ammo";
 import InputHandler from "./InputHandler";
 
 export default class AmmoPool extends InputHandler {
-  constructor(ctx, player, enemies) {
-    super(ctx);
+  constructor(game) {
+    super(game.ctx);
 
-    this.player = player;
-    this.enemies = enemies;
+    this.ctx = game.ctx;
+    this.player = game.player;
+    this.enemies = game.enemyPool;
     this.pool = [];
-    this.ctx = ctx;
     this.delay = 50;
     this.canAdd = true;
   }
