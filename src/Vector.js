@@ -68,7 +68,7 @@ export default class Vector {
     const { x, y } = vector2;
 
     const minX = this.x >= x ? this.x : x;
-    const minY = this.y >= x ? this.y : y;
+    const minY = this.y >= y ? this.y : y;
 
     return new Vector(minX, minY);
   }
@@ -77,7 +77,7 @@ export default class Vector {
     const { x, y } = vector2;
 
     const maxX = this.x <= x ? this.x : x;
-    const maxY = this.y <= x ? this.y : y;
+    const maxY = this.y <= y ? this.y : y;
 
     return new Vector(maxX, maxY);
   }

@@ -1,6 +1,5 @@
-const width = document.documentElement.clientWidth;
-const height = document.documentElement.clientHeight;
-
-export const CANVAS_WIDTH = width < height ? width : height;
-export const CANVAS_HEIGHT = CANVAS_WIDTH;
+export const CANVAS_WIDTH = window.innerWidth;
+export const CANVAS_HEIGHT = window.innerHeight;
+export const PERCENT_WIDTH = CANVAS_WIDTH / 100;
+export const PERCENT_HEIGHT = CANVAS_HEIGHT / 100;
 

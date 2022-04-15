@@ -16,7 +16,7 @@ export default class PartialSystem {
   }
 
   update() {
-    this.partials = this.partials.filter(partial => partial.size > 0);
+    this.partials = this.partials.filter(partial => partial.opacity > 0);
     this.partials.forEach(partial => partial.update());
   }
 }

@@ -1,23 +1,24 @@
-import { getMinMax, getRandomFromArray } from "./helpers";
+import { CANVAS_WIDTH, PERCENT_WIDTH } from "./consts";
+import { getRandomFromArray } from "./helpers";
 import PartialSystem from "./PartialSystem";
 import Vector from './Vector';
 
 const possibleDelay = [0, 500, 1000, 1500, 2000, 3000, 4000, 5000, 7000, 8000, 10000];
 const possibleMagnitude = [100, 200, 250, 300, 350, 400];
-const possibleSize = [100, 120, 130, 140, 200, 250, 300];
+const possibleHealth = [100, 120, 130, 140, 200, 250, 300];
 const possibleColors = ['red', 'blue', 'lightblue', 'yellow', 'orange'];
 
 export default class Enemy {
   constructor(ctx, player) {
     this.player = player;
-    this.size = getRandomFromArray(possibleSize);
+    this.health = getRandomFromArray(possibleHealth);
     this.position = this.player.position.add(Vector.random().setMag(ctx.canvas.clientWidth / 2 + getRandomFromArray(possibleMagnitude)));
     this.delay = getRandomFromArray(possibleDelay);
     this.color = getRandomFromArray(possibleColors);
     this.ctx = ctx;
-    this.speed = 1;
+    this.speed = PERCENT_WIDTH / 15;
     this.hidden = true;
-    this.deadSize = 20;
+    this.deadHealthLevel = 20;
     this.partialSystems = [];
     
     setTimeout(() => {
@@ -25,8 +26,12 @@ export default class Enemy {
     }, this.delay);
   }
 
+  get size() {
+    return (this.health / 100) * 5 * PERCENT_WIDTH;
+  }
+
   get isDead() {
-    return this.size <= this.deadSize;
+    return this.health <= this.deadHealthLevel;
   }
 
   get vel() {
@@ -36,7 +41,7 @@ export default class Enemy {
   hit() {
     if (this.isDead) return;
 
-    this.size -= 10;
+    this.health -= 10;
 
     const options = {
       color: this.color,
@@ -67,7 +72,7 @@ export default class Enemy {
     this.ctx.font = "20px serif";
     this.ctx.fillStyle = 'black';
     this.ctx.textAlign = 'center';
-    this.ctx.fillText(this.size - this.deadSize, x, y);
+    this.ctx.fillText(this.health - this.deadHealthLevel, x, y);
     this.ctx.stroke();
     this.ctx.restore();
   }
