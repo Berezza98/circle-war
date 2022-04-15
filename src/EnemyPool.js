@@ -4,7 +4,7 @@ export default class EnemyPool {
   constructor(ctx, player, score) {
     this.player = player;
     this.pool = [];
-    this.maxSize = 4;
+    this.maxSize = 5;
     this.score = score;
     this.ctx = ctx;
 
@@ -31,6 +31,10 @@ export default class EnemyPool {
     for (let i = 0; i < this.maxSize - this.pool.length; i++) {
       this.addEnemy();
       this.score.increase();
+
+      if (this.score.points % 100 === 0) {
+        this.maxSize++;
+      }
     }
   }
 

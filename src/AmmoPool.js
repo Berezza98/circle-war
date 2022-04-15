@@ -8,7 +8,6 @@ export default class AmmoPool extends InputHandler {
     this.player = player;
     this.enemies = enemies;
     this.pool = [];
-    this.maxSize = 200;
     this.ctx = ctx;
     this.delay = 50;
     this.canAdd = true;
@@ -17,7 +16,7 @@ export default class AmmoPool extends InputHandler {
   addAmmo() {
     const { position, sightPosition } = this.player;
 
-    if (this.pool.length < this.maxSize && this.canAdd) {
+    if (this.canAdd) {
       this.pool.push(new Ammo(this.ctx, position, sightPosition));
       this.canAdd = false;
 

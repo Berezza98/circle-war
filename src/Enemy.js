@@ -1,4 +1,4 @@
-import { CANVAS_WIDTH, PERCENT_WIDTH } from "./consts";
+import { PERCENT_WIDTH } from "./consts";
 import { getRandomFromArray } from "./helpers";
 import PartialSystem from "./PartialSystem";
 import Vector from './Vector';
