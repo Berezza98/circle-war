@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  user-select: none;
 }
 
 html, body {
@@ -14,14 +15,24 @@ body {
   position: relative;
 }
 
-canvas {
+.bg, .main {
   width: 100%;
   height: 100%;
   display: block;
 }
 
-.joystick {
+.joystick-left {
   background-color: transparent;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.joystick-right {
+  background-color: transparent;
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }
 
 .bg {

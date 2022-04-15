@@ -32,17 +32,16 @@ function animate(ctxs, dynamicElements) {
 }
 
 function main() {
-  let joystickLeft;
-  let joystickRight;
-  if (isMobile.any()) {
-    joystickLeft = new Joystick({ className: 'joystick', size: 200 }).append(document.body);
-  }
+  const joystickLeft = new Joystick({ className: 'joystick-left', size: 200, removeLastValue: true });
+  const joystickRight = new Joystick({ className: 'joystick-right', size: 200 });
   const bgCtx = createCanvas('bg');
-  const ctx = createCanvas();
+  const ctx = createCanvas('main');
+  
   if (isMobile.any()) {
-    joystickRight = new Joystick({ className: 'joystick', size: 200 }).append(document.body);
+    joystickLeft.append(document.body);
+    joystickRight.append(document.body);
   }
-
+  
   const background = new Background(bgCtx);
   const score = new Score(ctx);
   const player = new Player(ctx, joystickLeft, joystickRight);

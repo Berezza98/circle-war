@@ -1,7 +1,7 @@
 import Vector from "./Vector";
 
 export default class Joystick {
-  constructor({ className, size }) {
+  constructor({ className, size, removeLastValue }) {
     this.canvas = document.createElement('canvas');
     this.canvas.classList.add(className);
     this.canvas.height = this.canvas.width = size;
@@ -9,6 +9,7 @@ export default class Joystick {
     this.radius = this.canvas.width / 2;
     this.innerRadius = this.radius / 2;
     this.position = new Vector(0, 0);
+    this.removeLastValue = removeLastValue;
 
     this.addListeners();
     this.draw();
@@ -34,7 +35,9 @@ export default class Joystick {
     });
 
     this.canvas.addEventListener('touchend', () => {
-      this.position = new Vector(0, 0);
+      if (this.removeLastValue) {
+        this.position = new Vector(0, 0);
+      }
 
       this.draw();
     });
@@ -45,6 +48,7 @@ export default class Joystick {
 
     this.ctx.save();
     this.ctx.beginPath();
+    this.ctx.strokeStyle = 'white';
     this.ctx.translate(this.canvas.width / 2, this.canvas.height / 2)
     this.ctx.arc(0, 0, this.radius - 2, 0, Math.PI * 2);
     this.ctx.stroke();
@@ -52,7 +56,7 @@ export default class Joystick {
     this.ctx.beginPath();
     const { x, y } = this.position;
     this.ctx.arc(x, y, this.innerRadius, 0, Math.PI * 2);
-    this.ctx.fillStyle = 'black';
+    this.ctx.fillStyle = 'white';
     this.ctx.fill();
     this.ctx.restore();
   }

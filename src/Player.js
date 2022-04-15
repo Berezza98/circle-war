@@ -36,7 +36,7 @@ export default class Player extends InputHandler {
   }
 
   update() {
-    const speed = PERCENT_WIDTH / 15;
+    const speed = PERCENT_WIDTH / 20;
 
     if (this.keyboard.leftActive) {
       this.shootVector = Vector.fromAngle(this.shootVector.heading() - 0.05);
@@ -63,7 +63,7 @@ export default class Player extends InputHandler {
     }
 
     if (isMobile.any()) {
-      this.vel = this.vel.add(this.joystickLeft.data);
+      this.vel = this.vel.add(this.joystickLeft.data.mult(speed));
       this.shootVector = Vector.fromAngle(this.joystickRight.data.heading());
     }
 
