@@ -66,4 +66,8 @@ export default class Joystick {
 
     return this;
   }
+
+  remove() {
+    this.canvas.remove();
+  }
 }

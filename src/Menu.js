@@ -28,4 +28,8 @@ export default class Menu {
       new Game().start();
     });
   }
+
+  remove() {
+    this.parent.remove();
+  }
 }

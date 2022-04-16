@@ -1,4 +1,4 @@
-import { CANVAS_HEIGHT, CANVAS_WIDTH } from "./consts";
+import { CANVAS_HEIGHT, CANVAS_WIDTH, LANDSCAPE_ORIENTATION, PORTRAIT_ORIENTATION } from "./consts";
 
 export function getRandom(min, max) {
   min = Math.ceil(min);
@@ -42,6 +42,12 @@ export function createEl(elName, classList) {
   el.classList.add(...classNames);
 
   return el;
+}
+
+export function getOrientation() {
+  if (screen.orientation.angle === 0) return PORTRAIT_ORIENTATION;
+
+  return LANDSCAPE_ORIENTATION;
 }
 
 export const isMobile = {

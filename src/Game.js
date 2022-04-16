@@ -41,6 +41,8 @@ export default class Game {
     setTimeout(() => {
       cancelAnimationFrame(this.animation);
       this.ctx.canvas.remove();
+      this.joystickLeft.remove();
+      this.joystickRight.remove();
       localStorage.setItem(LOCAL_STORAGE_SCORE, this.score.points);
       new Menu();
     }, 20);

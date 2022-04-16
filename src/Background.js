@@ -48,6 +48,11 @@ export default class Background {
 
   stop() {
     cancelAnimationFrame(this.animation);
+    return this;
+  }
+
+  remove() {
+    this.ctx.canvas.remove();
   }
 }
 
