@@ -1,10 +1,7 @@
 import Ammo from "./Ammo";
-import InputHandler from "./InputHandler";
 
-export default class AmmoPool extends InputHandler {
+export default class AmmoPool {
   constructor(game) {
-    super(game.ctx);
-
     this.ctx = game.ctx;
     this.player = game.player;
     this.enemies = game.enemyPool;
@@ -27,7 +24,7 @@ export default class AmmoPool extends InputHandler {
   checkHit() {
     this.pool.forEach((ammo) => {
       this.enemies.pool.forEach(enemy => {
-        if (ammo.position.sub(enemy.position).mag() <= ammo.size + enemy.size) {
+        if (ammo.position.sub(enemy.position).mag() <= Ammo.size + enemy.size) {
           enemy.hit();
           ammo.remove();
         }
@@ -38,9 +35,7 @@ export default class AmmoPool extends InputHandler {
   update() {
     this.checkHit();
 
-    // if (this.keyboard.spaceActive) {
     this.addAmmo();
-    // }
 
     this.pool = this.pool.filter(ammo => ammo.isActive);
 

@@ -84,7 +84,15 @@ export default class Player extends InputHandler {
     // this.ctx.translate();
     this.ctx.beginPath();
 
-    drawCenterImage(this.ctx, Assets.images.me, x, y, this.size * 2, this.size * 2);
+    this.ctx.save();
+    this.ctx.translate(x, y);
+    const rotationVector = this.sightPosition.sub(this.position);
+    this.ctx.rotate(rotationVector.heading());
+    drawCenterImage(this.ctx, Assets.images.me, 0, 0, this.size * 2, this.size * 2);
+    // Add gun
+    drawCenterImage(this.ctx, Assets.images.gun, this.size, 0, this.size, this.size);
+    this.ctx.restore();
+
 
     // health text
     this.ctx.font = "20px serif";
@@ -93,11 +101,7 @@ export default class Player extends InputHandler {
     this.ctx.fillText(this.health, x, y);
 
     //scope drawing
-    this.ctx.beginPath();
-    this.ctx.arc(this.sightPosition.x, this.sightPosition.y, Ammo.size, 0, 2 * Math.PI);
-    this.ctx.fillStyle = Ammo.color;
-    this.ctx.fill();
-    this.ctx.stroke();
+    drawCenterImage(this.ctx, Assets.images.bullet, this.sightPosition.x, this.sightPosition.y, Ammo.size * 2, Ammo.size * 2);
     this.ctx.restore();
   }
 }

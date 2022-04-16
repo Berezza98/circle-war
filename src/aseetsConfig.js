@@ -9,6 +9,8 @@ import angryImg8 from './images/angry8.png';
 import angryImg9 from './images/angry9.png';
 import angryImg10 from './images/angry10.png';
 import meImg from './images/me.png';
+import bulletImg from './images/bullet.png';
+import gunImg from './images/gun.png';
 
 export const enemies = {
   angry: angryImg,
@@ -27,5 +29,7 @@ export default {
   images: {
     ...enemies,
     me: meImg,
+    bullet: bulletImg,
+    gun: gunImg,
   },
 };
