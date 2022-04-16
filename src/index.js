@@ -6,25 +6,20 @@ import Menu from './Menu';
 
 import './styles.css';
 
-let background;
-let changeOrientation;
-let menu;
-
 function main() {
   // DELETE PREVIOUS
-  background?.stop()?.remove?.();
-  changeOrientation?.remove?.();
-  menu?.remove?.();
+  ChangeOrientation.remove();
+  Background.remove();
+  Menu.remove();
 
-  background = new Background();
-  background.start();
+  Background.create().start();
 
   if (isMobile.any() && getOrientation() === consts.PORTRAIT_ORIENTATION) {
-    changeOrientation = new ChangeOrientation();
+    ChangeOrientation.create();
     return
   }
 
-  menu = new Menu();
+  Menu.create();
 }
 
 window.addEventListener("orientationchange", main);

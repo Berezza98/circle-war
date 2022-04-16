@@ -8,7 +8,20 @@ export default class ChangeOrientation {
     document.body.appendChild(this.parent);
   }
 
-  remove() {
-    this.parent.remove();
+  static instance = null;
+
+  static create() {
+    if (!ChangeOrientation.instance) {
+      ChangeOrientation.instance = new ChangeOrientation();
+    }
+
+    return ChangeOrientation.instance;
+  }
+
+  static remove() {
+    if (!ChangeOrientation.instance) return;
+
+    ChangeOrientation.instance.parent.remove();
+    ChangeOrientation.instance = null;
   }
 }

@@ -21,15 +21,28 @@ export default class Menu {
     this.addListeners();
   }
 
+  static instance = null;
+
+  static create() {
+    if (!Menu.instance) {
+      Menu.instance = new Menu();
+    }
+
+    return Menu.instance;
+  }
+
   addListeners() {
     this.startBtn.addEventListener('click', () => {
-      this.parent.remove();
+      Menu.remove();
 
       new Game().start();
     });
   }
 
-  remove() {
-    this.parent.remove();
+  static remove() {
+    if (!Menu.instance) return;
+
+    Menu.instance.parent.remove();
+    Menu.instance = null;
   }
 }

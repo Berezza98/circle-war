@@ -7,9 +7,28 @@ export default class Background {
     this.ctx = createCanvas('bg');
     this.starLength = 200;
     this.stars = [];
-    this.animation = null;
 
     this.init();
+  }
+
+  static animation = null;
+  static instance = null;
+
+  static create() {
+    if (!Background.instance) {
+      Background.instance = new Background();
+    }
+
+    return Background.instance;
+  }
+
+  static remove() {
+    if (!Background.instance) return
+
+    cancelAnimationFrame(Background.animation);
+    Background.instance.ctx.canvas.remove();
+
+    Background.instance = null
   }
 
   init() {
@@ -30,7 +49,7 @@ export default class Background {
     this.draw();
 
     this.stars.forEach(star => star.update());
-    this.animation = requestAnimationFrame(this.update.bind(this));
+    Background.animation = requestAnimationFrame(this.update.bind(this));
   }
 
   draw() {
@@ -44,15 +63,6 @@ export default class Background {
 
   start() {
     this.update();
-  }
-
-  stop() {
-    cancelAnimationFrame(this.animation);
-    return this;
-  }
-
-  remove() {
-    this.ctx.canvas.remove();
   }
 }
 

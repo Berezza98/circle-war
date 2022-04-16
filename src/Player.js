@@ -23,7 +23,7 @@ export default class Player extends InputHandler {
   }
 
   get size() {
-    return (this.health / 100) * 5 * consts.PERCENT_WIDTH;
+    return (this.health / 100) * 5 * consts.PERCENT_WIDTH + 20;
   }
 
   hit(value) {

@@ -43,8 +43,9 @@ export default class Game {
       this.ctx.canvas.remove();
       this.joystickLeft.remove();
       this.joystickRight.remove();
-      localStorage.setItem(consts.LOCAL_STORAGE_SCORE, this.score.points);
-      new Menu();
+      const currentRecord = parseInt(localStorage.getItem(consts.LOCAL_STORAGE_SCORE));
+      localStorage.setItem(consts.LOCAL_TORAGE_SCORE, currentRecord > this.score.points ? currentRecord : this.score.points);
+      Menu.create();
     }, 20);
   }
 }
