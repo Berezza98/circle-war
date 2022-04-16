@@ -1,4 +1,4 @@
-import { PERCENT_WIDTH } from "./consts";
+import consts from "./consts";
 import { getRandomFromArray } from "./helpers";
 import PartialSystem from "./PartialSystem";
 import Vector from './Vector';
@@ -16,7 +16,7 @@ export default class Enemy {
     this.delay = getRandomFromArray(possibleDelay);
     this.color = getRandomFromArray(possibleColors);
     this.ctx = ctx;
-    this.speed = PERCENT_WIDTH / 15;
+    this.speed = consts.PERCENT_WIDTH / 15;
     this.hidden = true;
     this.deadHealthLevel = 20;
     this.partialSystems = [];
@@ -27,7 +27,7 @@ export default class Enemy {
   }
 
   get size() {
-    return (this.health / 100) * 5 * PERCENT_WIDTH;
+    return (this.health / 100) * 5 * consts.PERCENT_WIDTH;
   }
 
   get isDead() {

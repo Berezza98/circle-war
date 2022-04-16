@@ -1,4 +1,4 @@
-import { CANVAS_HEIGHT, CANVAS_WIDTH, LANDSCAPE_ORIENTATION, PORTRAIT_ORIENTATION } from "./consts";
+import consts from "./consts";
 
 export function getRandom(min, max) {
   min = Math.ceil(min);
@@ -7,7 +7,7 @@ export function getRandom(min, max) {
 }
 
 export function isOnTheField({ x, y }) {
-  return x > 0 && x < CANVAS_WIDTH && y > 0 && y < CANVAS_HEIGHT;
+  return x > 0 && x < consts.CANVAS_WIDTH && y > 0 && y < consts.CANVAS_HEIGHT;
 }
 
 export function getRandomFromArray(array) {
@@ -23,8 +23,8 @@ export function getMinMax(origMin, origMax, min, max, value) {
 
 export function createCanvas(className) {
   const canvas = document.createElement('canvas');
-  canvas.height = CANVAS_HEIGHT;
-  canvas.width = CANVAS_WIDTH;
+  canvas.height = consts.CANVAS_HEIGHT;
+  canvas.width = consts.CANVAS_WIDTH;
 
   if (className) {
     canvas.classList.add(className);
@@ -45,9 +45,10 @@ export function createEl(elName, classList) {
 }
 
 export function getOrientation() {
-  if (screen.orientation.angle === 0) return PORTRAIT_ORIENTATION;
+  const angle = window.screen.orientation ? window.screen.orientation.angle : window.orientation
+  if (angle === 0) return consts.PORTRAIT_ORIENTATION;
 
-  return LANDSCAPE_ORIENTATION;
+  return consts.LANDSCAPE_ORIENTATION;
 }
 
 export const isMobile = {
@@ -67,7 +68,6 @@ export const isMobile = {
       return navigator.userAgent.match(/IEMobile/i) || navigator.userAgent.match(/WPDesktop/i);
   },
   any: function() {
-    // return false;
     return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
   }
 };

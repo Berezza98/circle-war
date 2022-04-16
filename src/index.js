@@ -1,6 +1,6 @@
 import Background from './Background';
 import ChangeOrientation from './ChangeOrientation';
-import { PORTRAIT_ORIENTATION } from './consts';
+import consts from './consts';
 import { getOrientation, isMobile } from './helpers';
 import Menu from './Menu';
 
@@ -19,7 +19,7 @@ function main() {
   background = new Background();
   background.start();
 
-  if (isMobile.any() && getOrientation() === PORTRAIT_ORIENTATION) {
+  if (isMobile.any() && getOrientation() === consts.PORTRAIT_ORIENTATION) {
     changeOrientation = new ChangeOrientation();
     return
   }

@@ -2,8 +2,7 @@ import Vector from './Vector';
 import Ammo from './Ammo';
 import InputHandler from './InputHandler';
 import { isMobile } from './helpers';
-import { CANVAS_HEIGHT, CANVAS_WIDTH, PERCENT_WIDTH } from './consts';
-import Menu from './Menu';
+import consts from './consts';
 
 export default class Player extends InputHandler {
   constructor(game) {
@@ -24,7 +23,7 @@ export default class Player extends InputHandler {
   }
 
   get size() {
-    return (this.health / 100) * 5 * PERCENT_WIDTH;
+    return (this.health / 100) * 5 * consts.PERCENT_WIDTH;
   }
 
   hit(value) {
@@ -40,7 +39,7 @@ export default class Player extends InputHandler {
   }
 
   update() {
-    const speed = PERCENT_WIDTH / 20;
+    const speed = consts.PERCENT_WIDTH / 20;
 
     if (this.keyboard.leftActive) {
       this.shootVector = Vector.fromAngle(this.shootVector.heading() - 0.05);
@@ -72,7 +71,7 @@ export default class Player extends InputHandler {
     }
 
     this.frictionForce();
-    this.position = this.position.add(this.vel).setMinLimit(new Vector(this.size, this.size)).setMaxLimit(new Vector(CANVAS_WIDTH - this.size, CANVAS_HEIGHT - this.size));
+    this.position = this.position.add(this.vel).setMinLimit(new Vector(this.size, this.size)).setMaxLimit(new Vector(consts.CANVAS_WIDTH - this.size, consts.CANVAS_HEIGHT - this.size));
 
     this.draw();
   }

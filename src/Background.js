@@ -1,4 +1,4 @@
-import { CANVAS_HEIGHT, CANVAS_WIDTH } from "./consts";
+import consts from "./consts";
 import { getRandom, createCanvas } from "./helpers";
 import Vector from "./Vector";
 
@@ -19,7 +19,7 @@ export default class Background {
   }
 
   update() {
-    this.ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    this.ctx.clearRect(0, 0, consts.CANVAS_WIDTH, consts.CANVAS_HEIGHT);
 
     this.stars = this.stars.filter(star => star.isAlive);
 
@@ -59,7 +59,7 @@ export default class Background {
 class Star {
   constructor(ctx) {
     this.ctx = ctx;
-    this.position = new Vector(getRandom(0, CANVAS_WIDTH), getRandom(0, CANVAS_HEIGHT));
+    this.position = new Vector(getRandom(0, consts.CANVAS_WIDTH), getRandom(0, consts.CANVAS_HEIGHT));
     this.live = getRandom(100, 1000);
     this.size = getRandom(1, 4);
   }

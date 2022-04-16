@@ -1,4 +1,4 @@
-import { CANVAS_WIDTH } from "./consts";
+import consts from "./consts";
 import { getRandom } from "./helpers";
 import Vector from "./Vector";
 
@@ -6,7 +6,7 @@ export default class Partial {
   constructor(ctx, options = {}) {
     this.ctx = ctx;
     this.options = options;
-    this.size = getRandom(5, CANVAS_WIDTH / 50);
+    this.size = getRandom(5, consts.CANVAS_WIDTH / 50);
     this.position = options.pos.add(Vector.random().mult(options.offset || getRandom(1, 5)));
     this.dir = this.position.sub(options.pos).normalize();
     this.opacity = 1;
