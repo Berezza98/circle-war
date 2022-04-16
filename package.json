@@ -12,6 +12,7 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.17.9",
+    "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "babel-loader": "^8.2.4",
     "css-loader": "^6.7.1",
@@ -24,6 +25,7 @@
   },
   "browserslist": "ie >= 10",
   "dependencies": {
+    "@babel/runtime": "^7.17.9",
     "core-js": "^3.21.1",
     "request-animation-frame-polyfill": "^1.1.2"
   }

@@ -1,5 +1,5 @@
 import consts from "./consts";
-import { getRandom } from "./helpers";
+import { drawCenterImage, getRandom } from "./helpers";
 import Vector from "./Vector";
 
 export default class Partial {
@@ -28,9 +28,13 @@ export default class Partial {
     this.ctx.save();
     this.ctx.beginPath();
     this.ctx.globalAlpha = this.opacity;
-    this.ctx.fillStyle = this.options.color || 'blue';
-    this.ctx.arc(x, y, this.size, 0, 2 * Math.PI);
-    this.ctx.fill();
+    if (this.options.image) {
+      drawCenterImage(this.ctx, this.options.image, x, y, this.size * 2, this.size * 2);
+    } else {
+      this.ctx.fillStyle = this.options.color || 'blue';
+      this.ctx.arc(x, y, this.size, 0, 2 * Math.PI);
+      this.ctx.fill();
+    }
     this.ctx.stroke();
     this.ctx.restore();
   }

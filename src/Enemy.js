@@ -1,21 +1,22 @@
-import consts from "./consts";
-import { getRandomFromArray } from "./helpers";
+import Assets from "./Assets";
+import { drawCenterImage, getRandomFromArray } from "./helpers";
 import PartialSystem from "./PartialSystem";
 import Vector from './Vector';
+import consts from "./consts";
+import { enemies } from "./aseetsConfig";
 
 const possibleDelay = [0, 500, 1000, 1500, 2000, 3000, 4000, 5000, 7000, 8000, 10000];
 const possibleMagnitude = [100, 200, 250, 300, 350, 400];
 const possibleHealth = [100, 120, 130, 140, 200, 250, 300];
-const possibleColors = ['red', 'blue', 'lightblue', 'yellow', 'orange'];
 
 export default class Enemy {
   constructor(ctx, player) {
+    this.ctx = ctx;
     this.player = player;
     this.health = getRandomFromArray(possibleHealth);
     this.position = this.player.position.add(Vector.random().setMag(ctx.canvas.clientWidth / 2 + getRandomFromArray(possibleMagnitude)));
     this.delay = getRandomFromArray(possibleDelay);
-    this.color = getRandomFromArray(possibleColors);
-    this.ctx = ctx;
+    this.image = Assets.images[getRandomFromArray(Object.keys(enemies))];
     this.speed = consts.PERCENT_WIDTH / 15;
     this.hidden = true;
     this.deadHealthLevel = 20;
@@ -44,7 +45,7 @@ export default class Enemy {
     this.health -= 10;
 
     const options = {
-      color: this.color,
+      image: this.image,
       offset: this.size,
       pos: this.position,
     };
@@ -66,9 +67,8 @@ export default class Enemy {
 
     this.ctx.save();
     this.ctx.beginPath();
-    this.ctx.arc(x, y, this.size, 0, 2 * Math.PI);
-    this.ctx.fillStyle = this.color;
-    this.ctx.fill();
+    // width and height X2 because SIZE was radius
+    drawCenterImage(this.ctx, this.image, x, y, this.size * 2, this.size * 2);
     this.ctx.font = "20px serif";
     this.ctx.fillStyle = 'black';
     this.ctx.textAlign = 'center';

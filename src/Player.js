@@ -1,7 +1,8 @@
 import Vector from './Vector';
 import Ammo from './Ammo';
 import InputHandler from './InputHandler';
-import { isMobile } from './helpers';
+import Assets from './Assets';
+import { drawCenterImage, isMobile } from './helpers';
 import consts from './consts';
 
 export default class Player extends InputHandler {
@@ -82,11 +83,8 @@ export default class Player extends InputHandler {
     this.ctx.save();
     // this.ctx.translate();
     this.ctx.beginPath();
-    // Max size - 5% from screen width
-    this.ctx.arc(x, y, this.size, 0, 2 * Math.PI);
-    this.ctx.fillStyle = 'green';
-    this.ctx.fill();
-    this.ctx.stroke();
+
+    drawCenterImage(this.ctx, Assets.images.me, x, y, this.size * 2, this.size * 2);
 
     // health text
     this.ctx.font = "20px serif";

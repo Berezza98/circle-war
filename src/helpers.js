@@ -44,6 +44,10 @@ export function createEl(elName, classList) {
   return el;
 }
 
+export function drawCenterImage(ctx, image, x, y, width, height) {
+  ctx.drawImage(image, x - width / 2, y - height / 2, width, height);
+}
+
 export function getOrientation() {
   const angle = window.screen.orientation ? window.screen.orientation.angle : window.orientation
   if (angle === 0) return consts.PORTRAIT_ORIENTATION;
