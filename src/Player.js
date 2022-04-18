@@ -17,6 +17,8 @@ export default class Player extends InputHandler {
     this.health = 100;
     this.joystickLeft = game.joystickLeft;
     this.joystickRight = game.joystickRight;
+    this.secondGunAvailable = false;
+    this.secondGunTimer = null;
   }
 
   get sightPosition() {
@@ -29,6 +31,17 @@ export default class Player extends InputHandler {
 
   get size() {
     return (this.health / 100) * 5 * consts.PERCENT_WIDTH + 20;
+  }
+
+  setSecondGun(value, time) {
+    clearTimeout(this.secondGunTimer);
+    this.secondGunAvailable = value;
+
+    if (!time) return;
+
+    this.secondGunTimer = setTimeout(() => {
+      this.secondGunAvailable = !value;
+    }, time);
   }
 
   increaseHealth(value) {
@@ -100,6 +113,10 @@ export default class Player extends InputHandler {
     drawCenterImage(this.ctx, Assets.images.me, 0, 0, this.size * 2, this.size * 2);
     // Add gun
     drawCenterImage(this.ctx, Assets.images.gun, this.size, 25 * this.health / 100, this.size, this.size);
+    if (this.secondGunAvailable) {
+      drawCenterImage(this.ctx, Assets.images.gunOpposite, -this.size, 25 * this.health / 100, this.size, this.size);
+    }
+
     this.ctx.restore();
 
 

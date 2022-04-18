@@ -3,7 +3,7 @@ import Vector from "./Vector";
 import consts from "./consts";
 import Assets from "./Assets";
 
-const possiblePerkType = [consts.PERK_LIVE];
+const possiblePerkType = [consts.PERK_HEALTH, consts.PERK_DOUBLE_BULLET];
 
 export default class Perk {
   constructor(ctx) {
@@ -25,8 +25,11 @@ export default class Perk {
 
   effect(player) {
     switch (this.type) {
-      case consts.PERK_LIVE:
+      case consts.PERK_HEALTH:
         player.increaseHealth(10);
+        break;
+      case consts.PERK_DOUBLE_BULLET:
+        player.setSecondGun(true, 30000);
         break;
     }
   }

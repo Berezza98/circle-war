@@ -2,17 +2,29 @@ import Assets from "./Assets";
 import { drawCenterImage, isOnTheField } from "./helpers";
 
 export default class Ammo {
-  constructor(ctx, player) {
-    this.position = player.sightPosition;
+  constructor(ctx, player, options) {
+    this.options = Object.assign({}, {
+      mode: Ammo.modes.regular
+    }, options);
 
-    this.vel = player.sightDirection.normalize();
-    this.active = false;
+    this.position =
+      this.options.mode === Ammo.modes.regular
+        ? player.sightPosition
+        : player.position.sub(player.sightPosition.sub(player.position));
+    this.vel =
+      this.options.mode === Ammo.modes.regular
+        ? player.sightDirection.normalize()
+        : player.sightDirection.mult(-1).normalize();
     this.ctx = ctx;
     this.active = true;
   }
 
+  static modes = {
+    regular: 'regular',
+    opposite: 'opposite',
+  };
+
   static size = 10;
-  static color = 'red';
 
   get isActive() {
     return isOnTheField(this.position) && this.active;

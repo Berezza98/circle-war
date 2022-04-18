@@ -13,7 +13,9 @@ import angryImg10 from './images/angry10.png';
 import meImg from './images/me.png';
 import bulletImg from './images/bullet.png';
 import gunImg from './images/gun.png';
-import heartImg from './images/health-perk.png';
+import gunOppositeImg from './images/gun-opposite.png';
+import healthPerkImg from './images/health-perk.png';
+import doubleBulletPerkImg from './images/double-bullet-perk.png';
 
 export const enemies = {
   angry: angryImg,
@@ -29,7 +31,8 @@ export const enemies = {
 };
 
 export const perks = {
-  [consts.PERK_LIVE]: heartImg,
+  [consts.PERK_HEALTH]: healthPerkImg,
+  [consts.PERK_DOUBLE_BULLET]: doubleBulletPerkImg,
 };
 
 export default {
@@ -39,5 +42,6 @@ export default {
     me: meImg,
     bullet: bulletImg,
     gun: gunImg,
+    gunOpposite: gunOppositeImg,
   },
 };

@@ -13,6 +13,9 @@ export default class AmmoPool {
   addAmmo() {
     if (this.canAdd) {
       this.pool.push(new Ammo(this.ctx, this.player));
+      if (this.player.secondGunAvailable) {
+        this.pool.push(new Ammo(this.ctx, this.player, { mode: Ammo.modes.opposite }));
+      }
       this.canAdd = false;
 
       setTimeout(() => this.canAdd = true, this.delay);
