@@ -3,13 +3,17 @@ import Vector from "./Vector";
 import consts from "./consts";
 import Assets from "./Assets";
 
-const possiblePerkType = [consts.PERK_HEALTH, consts.PERK_DOUBLE_BULLET];
+const possiblePerkType = [
+  consts.PERK_HEALTH,
+  consts.PERK_DOUBLE_BULLET,
+  consts.PERK_ARMOR,
+];
 
 export default class Perk {
   constructor(ctx) {
     this.ctx = ctx;
     this.position = new Vector(getRandom(0, consts.CANVAS_WIDTH), getRandom(0, consts.CANVAS_HEIGHT));
-    this.size = consts.PERCENT_HEIGHT * 3;
+    this.size = consts.PERCENT_WIDTH * 3;
     this.opacity = 1;
     this.type = getRandomFromArray(possiblePerkType);
     this.hidden = true;
@@ -30,6 +34,9 @@ export default class Perk {
         break;
       case consts.PERK_DOUBLE_BULLET:
         player.setSecondGun(true, 30000);
+        break;
+      case consts.PERK_ARMOR:
+        player.setArmor(true, 10000);
         break;
     }
   }

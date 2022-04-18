@@ -27,6 +27,6 @@ async function main() {
 }
 
 window.addEventListener("orientationchange", main);
-window.addEventListener("resize", main);
+// window.addEventListener("resize", main);
 
 main();

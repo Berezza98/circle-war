@@ -28,6 +28,16 @@ export default class Game {
     this.dynamicElements = [this.player, this.enemyPool, this.ammoPool, this.score, this.perkPool];
   }
 
+  static instance = null;
+
+  static create() {
+    if (!Game.instance) {
+      Game.instance = new Game();
+    }
+
+    return Game.instance;
+  }
+
   update() {
     this.ctx.clearRect(0, 0, consts.CANVAS_WIDTH, consts.CANVAS_HEIGHT);
     this.dynamicElements.forEach(el => el.update());
@@ -47,7 +57,7 @@ export default class Game {
       this.joystickRight.remove();
       const currentRecord = parseInt(localStorage.getItem(consts.LOCAL_STORAGE_SCORE));
       localStorage.setItem(consts.LOCAL_STORAGE_SCORE, currentRecord > this.score.points ? currentRecord : this.score.points);
-      Menu.create();
+      Game.instance = null;
     }, 20);
   }
 }

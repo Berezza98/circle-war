@@ -4,6 +4,7 @@ import InputHandler from './InputHandler';
 import Assets from './Assets';
 import { drawCenterImage, isMobile } from './helpers';
 import consts from './consts';
+import Menu from './Menu';
 
 export default class Player extends InputHandler {
   constructor(game) {
@@ -19,6 +20,8 @@ export default class Player extends InputHandler {
     this.joystickRight = game.joystickRight;
     this.secondGunAvailable = false;
     this.secondGunTimer = null;
+    this.activeArmor = false;
+    this.activeArmorTimer = null;
   }
 
   get sightPosition() {
@@ -31,6 +34,17 @@ export default class Player extends InputHandler {
 
   get size() {
     return (this.health / 100) * 5 * consts.PERCENT_WIDTH + 20;
+  }
+
+  setArmor(value, time) {
+    clearTimeout(this.activeArmorTimer);
+    this.activeArmor = value;
+
+    if (!time) return;
+
+    this.activeArmorTimer = setTimeout(() => {
+      this.activeArmor = !value;
+    }, time);
   }
 
   setSecondGun(value, time) {
@@ -52,7 +66,8 @@ export default class Player extends InputHandler {
 
   hit(value) {
     if (this.health <= 10) {
-      return this.game.stop();
+      this.game.stop();
+      Menu.create();
     }
 
     this.health -= value * 10;

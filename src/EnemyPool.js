@@ -24,7 +24,7 @@ export default class EnemyPool {
       return !enemy.isDead && (playerPosition.sub(enemy.position).mag() > enemy.size + playerSize);
     });
 
-    if (collisioned.length > 0) {
+    if (collisioned.length > 0 && !this.player.activeArmor) {
       this.player.hit(collisioned.length);
     }
 

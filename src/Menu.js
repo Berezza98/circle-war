@@ -24,6 +24,7 @@ export default class Menu {
   static instance = null;
 
   static create() {
+    Game.create().stop();
     if (!Menu.instance) {
       Menu.instance = new Menu();
     }
@@ -35,7 +36,7 @@ export default class Menu {
     this.startBtn.addEventListener('click', () => {
       Menu.remove();
 
-      new Game().start();
+      Game.create().start();
     });
   }
 
