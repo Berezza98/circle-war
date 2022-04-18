@@ -6,15 +6,13 @@ export default class AmmoPool {
     this.player = game.player;
     this.enemies = game.enemyPool;
     this.pool = [];
-    this.delay = 50;
+    this.delay = 100;
     this.canAdd = true;
   }
 
   addAmmo() {
-    const { position, sightPosition } = this.player;
-
     if (this.canAdd) {
-      this.pool.push(new Ammo(this.ctx, position, sightPosition));
+      this.pool.push(new Ammo(this.ctx, this.player));
       this.canAdd = false;
 
       setTimeout(() => this.canAdd = true, this.delay);

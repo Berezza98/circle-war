@@ -2,10 +2,10 @@ import Assets from "./Assets";
 import { drawCenterImage, isOnTheField } from "./helpers";
 
 export default class Ammo {
-  constructor(ctx, playerPosition, sightPosition) {
-    this.position = sightPosition;
+  constructor(ctx, player) {
+    this.position = player.sightPosition;
 
-    this.vel = sightPosition.sub(playerPosition).normalize();
+    this.vel = player.sightDirection.normalize();
     this.active = false;
     this.ctx = ctx;
     this.active = true;

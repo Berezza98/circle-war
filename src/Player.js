@@ -20,7 +20,11 @@ export default class Player extends InputHandler {
   }
 
   get sightPosition() {
-    return this.position.add(this.shootVector.setMag(this.size));
+    return this.position.add(this.shootVector.setMag(this.size * 1.6));
+  }
+
+  get sightDirection() {
+    return this.sightPosition.sub(this.position);
   }
 
   get size() {
@@ -86,11 +90,10 @@ export default class Player extends InputHandler {
 
     this.ctx.save();
     this.ctx.translate(x, y);
-    const rotationVector = this.sightPosition.sub(this.position);
-    this.ctx.rotate(rotationVector.heading());
+    this.ctx.rotate(this.sightDirection.heading());
     drawCenterImage(this.ctx, Assets.images.me, 0, 0, this.size * 2, this.size * 2);
     // Add gun
-    drawCenterImage(this.ctx, Assets.images.gun, this.size, 0, this.size, this.size);
+    drawCenterImage(this.ctx, Assets.images.gun, this.size, 25 * this.health / 100, this.size, this.size);
     this.ctx.restore();
 
 
@@ -100,8 +103,6 @@ export default class Player extends InputHandler {
     this.ctx.textAlign = 'center';
     this.ctx.fillText(this.health, x, y);
 
-    //scope drawing
-    drawCenterImage(this.ctx, Assets.images.bullet, this.sightPosition.x, this.sightPosition.y, Ammo.size * 2, Ammo.size * 2);
     this.ctx.restore();
   }
 }
