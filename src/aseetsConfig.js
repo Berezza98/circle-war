@@ -13,7 +13,7 @@ import angryImg10 from './images/angry10.png';
 import meImg from './images/me.png';
 import bulletImg from './images/bullet.png';
 import gunImg from './images/gun.png';
-import heartImg from './images/heart.png';
+import heartImg from './images/health-perk.png';
 
 export const enemies = {
   angry: angryImg,
