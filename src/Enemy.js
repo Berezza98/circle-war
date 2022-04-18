@@ -21,6 +21,8 @@ export default class Enemy {
     this.hidden = true;
     this.deadHealthLevel = 20;
     this.partialSystems = [];
+    this.isFreezed = false;
+    this.freezedTimer = null;
     
     setTimeout(() => {
       this.hidden = false;
@@ -37,6 +39,17 @@ export default class Enemy {
 
   get vel() {
     return this.player.position.sub(this.position).normalize().mult(this.speed);
+  }
+
+  setFreezed(value, time) {
+    clearTimeout(this.freezedTimer);
+    this.isFreezed = value;
+
+    if (!time) return;
+
+    this.freezedTimer = setTimeout(() => {
+      this.isFreezed = !value;
+    }, time);
   }
 
   hit() {
@@ -56,7 +69,7 @@ export default class Enemy {
   update() {
     if (this.hidden) return;
  
-    this.position = this.position.add(this.vel);
+    this.position = this.position.add(this.isFreezed ? new Vector(0, 0) : this.vel);
 
     this.partialSystems.forEach(ps => ps.update());
     this.draw();

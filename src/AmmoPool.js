@@ -12,7 +12,7 @@ export default class AmmoPool {
 
   addAmmo() {
     if (this.canAdd) {
-      this.pool.push(new Ammo(this.ctx, this.player));
+      this.pool.push(new Ammo(this.ctx, this.player, { mode: Ammo.modes.regular }));
       if (this.player.secondGunAvailable) {
         this.pool.push(new Ammo(this.ctx, this.player, { mode: Ammo.modes.opposite }));
       }
@@ -27,6 +27,11 @@ export default class AmmoPool {
       this.enemies.pool.forEach(enemy => {
         if (ammo.position.sub(enemy.position).mag() <= Ammo.size + enemy.size) {
           enemy.hit();
+
+          if (ammo.isIceAmmo) {
+            enemy.setFreezed(true, 10000);
+          }
+
           ammo.remove();
         }
       });

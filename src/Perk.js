@@ -7,6 +7,7 @@ const possiblePerkType = [
   consts.PERK_HEALTH,
   consts.PERK_DOUBLE_BULLET,
   consts.PERK_ARMOR,
+  consts.PERK_ICE,
 ];
 
 export default class Perk {
@@ -37,6 +38,9 @@ export default class Perk {
         break;
       case consts.PERK_ARMOR:
         player.setArmor(true, 10000);
+        break;
+      case consts.PERK_ICE:
+        player.setBullets(true, 15000);
         break;
     }
   }

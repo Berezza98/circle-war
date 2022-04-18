@@ -12,11 +12,13 @@ import angryImg9 from './images/angry9.png';
 import angryImg10 from './images/angry10.png';
 import meImg from './images/me.png';
 import bulletImg from './images/bullet.png';
+import iceBulletImg from './images/ice-bullet.png';
 import gunImg from './images/gun.png';
 import gunOppositeImg from './images/gun-opposite.png';
 import healthPerkImg from './images/health-perk.png';
 import doubleBulletPerkImg from './images/double-bullet-perk.png';
 import armorPerkImg from './images/armor-perk.png';
+import icePerkImg from './images/ice-perk.png';
 
 export const enemies = {
   angry: angryImg,
@@ -35,6 +37,7 @@ export const perks = {
   [consts.PERK_HEALTH]: healthPerkImg,
   [consts.PERK_DOUBLE_BULLET]: doubleBulletPerkImg,
   [consts.PERK_ARMOR]: armorPerkImg,
+  [consts.PERK_ICE]: icePerkImg,
 };
 
 export default {
@@ -43,6 +46,7 @@ export default {
     ...perks,
     me: meImg,
     bullet: bulletImg,
+    iceBullet: iceBulletImg,
     gun: gunImg,
     gunOpposite: gunOppositeImg,
   },

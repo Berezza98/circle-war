@@ -1,10 +1,12 @@
 import Assets from "./Assets";
 import { drawCenterImage, isOnTheField } from "./helpers";
+import consts from "./consts";
 
 export default class Ammo {
   constructor(ctx, player, options) {
+    this.player = player;
     this.options = Object.assign({}, {
-      mode: Ammo.modes.regular
+      mode: Ammo.modes.regular,
     }, options);
 
     this.position =
@@ -17,6 +19,7 @@ export default class Ammo {
         : player.sightDirection.mult(-1).normalize();
     this.ctx = ctx;
     this.active = true;
+    this.isIceAmmo = this.player.iceBullets;
   }
 
   static modes = {
@@ -45,7 +48,8 @@ export default class Ammo {
     this.ctx.save();
     this.ctx.translate(x, y);
     this.ctx.rotate(this.vel.heading());
-    drawCenterImage(this.ctx, Assets.images.bullet, 0, 0, Ammo.size * 2, Ammo.size * 2);
+    const ammoImg = this.isIceAmmo ? Assets.images.iceBullet : Assets.images.bullet;
+    drawCenterImage(this.ctx, ammoImg, 0, 0, Ammo.size * 2, Ammo.size * 2);
     this.ctx.restore();
   }
 }
