@@ -14,5 +14,7 @@ export default {
   LOCAL_STORAGE_SCORE: 'circle_wars_best_score',
   PORTRAIT_ORIENTATION: 'PORTRAIT',
   LANDSCAPE_ORIENTATION: 'LANDSCAPE',
+
+  PERK_LIVE: 'PERK_LIVE'
 };
 

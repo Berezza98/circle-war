@@ -6,6 +6,7 @@ import Score from './Score';
 import { createCanvas, isMobile } from './helpers';
 import consts from './consts';
 import Menu from './Menu';
+import PerkPool from './PerkPool';
 
 export default class Game {
   constructor() {
@@ -16,6 +17,7 @@ export default class Game {
     this.player = new Player(this);
     this.enemyPool = new EnemyPool(this);
     this.ammoPool = new AmmoPool(this);
+    this.perkPool = new PerkPool(this);
     this.animation = null;
 
     if (isMobile.any()) {
@@ -23,7 +25,7 @@ export default class Game {
       this.joystickRight.append(document.body);
     }
 
-    this.dynamicElements = [this.player, this.enemyPool, this.ammoPool, this.score];
+    this.dynamicElements = [this.player, this.enemyPool, this.ammoPool, this.score, this.perkPool];
   }
 
   update() {

@@ -6,7 +6,7 @@ export default class EnemyPool {
     this.player = game.player;
     this.score = game.score;
     this.pool = [];
-    this.maxSize = 5;
+    this.maxSize = 10;
 
     for (let i = 0; i < this.maxSize; i++) {
       this.addEnemy();

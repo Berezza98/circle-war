@@ -31,6 +31,12 @@ export default class Player extends InputHandler {
     return (this.health / 100) * 5 * consts.PERCENT_WIDTH + 20;
   }
 
+  increaseHealth(value) {
+    if (!value) throw Error('Expected number argument, but got: ', typeof value);
+
+    this.health += value;
+  }
+
   hit(value) {
     if (this.health <= 10) {
       return this.game.stop();

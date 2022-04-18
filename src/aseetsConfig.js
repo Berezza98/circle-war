@@ -1,3 +1,5 @@
+import consts from './consts';
+
 import angryImg from './images/angry.png';
 import angryImg2 from './images/angry2.png';
 import angryImg3 from './images/angry3.png';
@@ -11,6 +13,7 @@ import angryImg10 from './images/angry10.png';
 import meImg from './images/me.png';
 import bulletImg from './images/bullet.png';
 import gunImg from './images/gun.png';
+import heartImg from './images/heart.png';
 
 export const enemies = {
   angry: angryImg,
@@ -23,11 +26,16 @@ export const enemies = {
   angry8: angryImg8,
   angry9: angryImg9,
   angry10: angryImg10,
-}
+};
+
+export const perks = {
+  [consts.PERK_LIVE]: heartImg,
+};
 
 export default {
   images: {
     ...enemies,
+    ...perks,
     me: meImg,
     bullet: bulletImg,
     gun: gunImg,
