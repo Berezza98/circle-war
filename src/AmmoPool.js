@@ -62,7 +62,7 @@ export default class AmmoPool {
         if (ammo.position.sub(enemy.position).mag() <= Ammo.size + enemy.size) {
           enemy.hit();
 
-          if (ammo.isIceAmmo) {
+          if (ammo.options.iceBullets) {
             enemy.setFreezed(true, 10000);
           }
 

@@ -7,11 +7,11 @@ import {
 import Assets from "./Assets";
 
 const possiblePerkType = [
-  // PERK_HEALTH,
-  // PERK_DOUBLE_BULLET,
-  // PERK_ARMOR,
+  PERK_HEALTH,
+  PERK_DOUBLE_BULLET,
+  PERK_ARMOR,
   PERK_ICE,
-  // PERK_MISSILES,
+  PERK_MISSILES,
 ];
 
 export default class Perk {
