@@ -24,10 +24,7 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        loader: 'file-loader',
-        options: {
-          name: 'images/[name].[ext]'
-        }
+        loader: 'url-loader'
       },
       {
         test: /\.m?js$/,

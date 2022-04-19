@@ -67,7 +67,7 @@ export default class Ammo {
     this.ctx.save();
     this.ctx.translate(x, y);
     this.ctx.rotate(this.options.missilesBullets ? this.closestEnemyVector.heading() : this.vel.heading());
-    const ammoImg = this.options.isIceAmmo ? Assets.images.iceBullet : Assets.images.bullet;
+    const ammoImg = this.options.iceBullets ? Assets.images.iceBullet : Assets.images.bullet;
     drawCenterImage(this.ctx, ammoImg, 0, 0, Ammo.size * 2, Ammo.size * 2);
     this.ctx.restore();
   }
