@@ -2,7 +2,7 @@ import Assets from "./Assets";
 import { drawCenterImage, getRandomFromArray } from "./helpers";
 import PartialSystem from "./PartialSystem";
 import Vector from './Vector';
-import consts from "./consts";
+import { CANVAS_HEIGHT, CANVAS_WIDTH } from "./consts";
 import { enemies } from "./aseetsConfig";
 
 const possibleDelay = [0, 500, 1000, 1500, 2000, 3000, 4000, 5000, 7000, 8000, 10000];
@@ -14,7 +14,6 @@ export default class Enemy {
     this.ctx = ctx;
     this.player = player;
     this.health = getRandomFromArray(possibleHealth);
-    this.position = this.player.position.add(Vector.random().setMag(ctx.canvas.clientWidth / 2 + getRandomFromArray(possibleMagnitude)));
     this.delay = getRandomFromArray(possibleDelay);
     this.image = Assets.images[getRandomFromArray(Object.keys(enemies))];
     this.speed = 1;
@@ -23,6 +22,10 @@ export default class Enemy {
     this.partialSystems = [];
     this.isFreezed = false;
     this.freezedTimer = null;
+    
+    const maxMag = new Vector(0, 0).sub(new Vector(CANVAS_WIDTH, CANVAS_HEIGHT)).mag();
+    const centerVector = new Vector(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+    this.position = Vector.random().setMag(maxMag / 2 + this.size + getRandomFromArray(possibleMagnitude)).add(centerVector);
     
     setTimeout(() => {
       this.hidden = false;
