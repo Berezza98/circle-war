@@ -8,4 +8,5 @@ export const PERK_HEALTH = 'PERK_HEALTH';
 export const PERK_DOUBLE_BULLET = 'PERK_DOUBLE_BULLET';
 export const PERK_ARMOR = 'PERK_ARMOR';
 export const PERK_ICE = 'PERK_ICE';
+export const PERK_MISSILES = 'PERK_MISSILES';
 

@@ -3,18 +3,52 @@ import Ammo from "./Ammo";
 export default class AmmoPool {
   constructor(game) {
     this.ctx = game.ctx;
+    this.game = game;
     this.player = game.player;
     this.enemies = game.enemyPool;
     this.pool = [];
     this.delay = 100;
     this.canAdd = true;
+    this.iceBullets = false;
+    this.iceBulletsTimer = null;
+    this.missilesBullets = false;
+    this.missilesBulletsTimer = null;
+  }
+
+  setMissilesBullets(value, time) {
+    clearTimeout(this.missilesBulletsTimer);
+    this.missilesBullets = value;
+
+    if (!time) return;
+
+    this.missilesBulletsTimer = setTimeout(() => {
+      this.missilesBullets = !value;
+    }, time);
+  }
+
+  setIceBullets(value, time) {
+    clearTimeout(this.iceBulletsTimer);
+    this.iceBullets = value;
+
+    if (!time) return;
+
+    this.iceBulletsTimer = setTimeout(() => {
+      this.iceBullets = !value;
+    }, time);
   }
 
   addAmmo() {
     if (this.canAdd) {
-      this.pool.push(new Ammo(this.ctx, this.player, { mode: Ammo.modes.regular }));
+      const options = {
+        mode: Ammo.modes.regular,
+        iceBullets: this.iceBullets,
+        missilesBullets: this.missilesBullets,
+      };
+
+      this.pool.push(new Ammo(this.ctx, this.game, options));
       if (this.player.secondGunAvailable) {
-        this.pool.push(new Ammo(this.ctx, this.player, { mode: Ammo.modes.opposite }));
+        options.mode = Ammo.modes.opposite;
+        this.pool.push(new Ammo(this.ctx, this.game, options));
       }
       this.canAdd = false;
 

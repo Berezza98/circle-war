@@ -3,6 +3,7 @@ import Perk from "./Perk";
 export default class PerkPool {
   constructor(game) {
     this.ctx = game.ctx;
+    this.game = game;
     this.player = game.player;
     this.pool = [];
     this.maxSize = 2;
@@ -27,7 +28,7 @@ export default class PerkPool {
 
     this.readyPerks.forEach(perk => {
       if (playerPosition.sub(perk.position).mag() <= perk.size + playerSize) {
-        perk.effect(this.player);
+        perk.effect(this.game);
         this.pool = this.pool.filter(el => el !== perk);
       }
     });

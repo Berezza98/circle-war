@@ -2,15 +2,16 @@ import { drawCenterImage, getRandom, getRandomFromArray } from "./helpers";
 import Vector from "./Vector";
 import {
   PERK_ARMOR, PERK_DOUBLE_BULLET, PERK_HEALTH, PERK_ICE,
-  CANVAS_HEIGHT, CANVAS_WIDTH,
+  PERK_MISSILES, CANVAS_HEIGHT, CANVAS_WIDTH,
 } from "./consts";
 import Assets from "./Assets";
 
 const possiblePerkType = [
-  PERK_HEALTH,
-  PERK_DOUBLE_BULLET,
-  PERK_ARMOR,
-  PERK_ICE,
+  // PERK_HEALTH,
+  // PERK_DOUBLE_BULLET,
+  // PERK_ARMOR,
+  // PERK_ICE,
+  PERK_MISSILES,
 ];
 
 export default class Perk {
@@ -31,7 +32,9 @@ export default class Perk {
     return this.opacity > 0;
   }
 
-  effect(player) {
+  effect(game) {
+    const { player, ammoPool } = game;
+
     switch (this.type) {
       case PERK_HEALTH:
         player.increaseHealth(10);
@@ -43,7 +46,10 @@ export default class Perk {
         player.setArmor(true, 10000);
         break;
       case PERK_ICE:
-        player.setBullets(true, 15000);
+        ammoPool.setIceBullets(true, 15000);
+        break;
+      case PERK_MISSILES:
+        ammoPool.setMissilesBullets(true, 15000);
         break;
     }
   }

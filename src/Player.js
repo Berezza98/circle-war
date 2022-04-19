@@ -21,8 +21,6 @@ export default class Player extends InputHandler {
     this.secondGunTimer = null;
     this.activeArmor = false;
     this.activeArmorTimer = null;
-    this.iceBullets = false;
-    this.iceBulletsTimer = null;
   }
 
   get sightPosition() {
@@ -35,17 +33,6 @@ export default class Player extends InputHandler {
 
   get size() {
     return this.health + 20;
-  }
-
-  setBullets(value, time) {
-    clearTimeout(this.iceBulletsTimer);
-    this.iceBullets = value;
-
-    if (!time) return;
-
-    this.iceBulletsTimer = setTimeout(() => {
-      this.iceBullets = !value;
-    }, time);
   }
 
   setArmor(value, time) {
