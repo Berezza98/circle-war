@@ -30,9 +30,34 @@ export function createCanvas(className) {
     canvas.classList.add(className);
   }
 
+  resize(canvas);
+
   document.body.appendChild(canvas);
 
   return canvas.getContext('2d');
+}
+
+function resize(canvas) {
+  let cWidth = window.innerWidth;
+  let cHeight = window.innerHeight;
+
+  const nativeRatio = CANVAS_WIDTH / CANVAS_HEIGHT;
+  const browserWindowRatio = cWidth / cHeight;
+
+  if (browserWindowRatio > nativeRatio) {
+
+    cHeight = Math.floor(cHeight);
+    if (cHeight > CANVAS_HEIGHT) cHeight = CANVAS_HEIGHT;
+
+    cWidth = Math.floor(cHeight * nativeRatio);
+  } else {
+    cWidth = Math.floor(cWidth);
+    if (cWidth > CANVAS_WIDTH) cWidth = CANVAS_WIDTH;
+    cHeight = Math.floor(cWidth / nativeRatio);
+  }
+
+  canvas.style.width = `${cWidth}px`;
+  canvas.style.height = `${cHeight}px`;
 }
 
 export function createEl(elName, classList) {
