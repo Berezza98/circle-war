@@ -52,7 +52,11 @@ export default class Ammo {
   }
 
   update() {
-    this.position = this.position.add(this.options.missilesBullets ? this.closestEnemyVector : this.vel);
+    if (this.options.missilesBullets) {
+      this.vel = this.vel.add(this.closestEnemyVector).setMag(2);
+    }
+
+    this.position = this.position.add(this.vel);
 
     this.draw();
   }
