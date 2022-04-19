@@ -17,7 +17,7 @@ export default class Enemy {
     this.position = this.player.position.add(Vector.random().setMag(ctx.canvas.clientWidth / 2 + getRandomFromArray(possibleMagnitude)));
     this.delay = getRandomFromArray(possibleDelay);
     this.image = Assets.images[getRandomFromArray(Object.keys(enemies))];
-    this.speed = consts.PERCENT_WIDTH / 15;
+    this.speed = 1;
     this.hidden = true;
     this.deadHealthLevel = 20;
     this.partialSystems = [];
@@ -30,7 +30,7 @@ export default class Enemy {
   }
 
   get size() {
-    return (this.health / 100) * 5 * consts.PERCENT_WIDTH;
+    return this.health;
   }
 
   get isDead() {

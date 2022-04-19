@@ -1,9 +1,8 @@
 import Vector from './Vector';
-import Ammo from './Ammo';
 import InputHandler from './InputHandler';
 import Assets from './Assets';
 import { drawCenterImage, isMobile } from './helpers';
-import consts from './consts';
+import { CANVAS_WIDTH, CANVAS_HEIGHT } from './consts';
 import Menu from './Menu';
 
 export default class Player extends InputHandler {
@@ -35,7 +34,7 @@ export default class Player extends InputHandler {
   }
 
   get size() {
-    return (this.health / 100) * 5 * consts.PERCENT_WIDTH + 20;
+    return this.health + 20;
   }
 
   setBullets(value, time) {
@@ -91,7 +90,7 @@ export default class Player extends InputHandler {
   }
 
   update() {
-    const speed = consts.PERCENT_WIDTH / 20;
+    const speed = 1;
 
     if (this.keyboard.leftActive) {
       this.shootVector = Vector.fromAngle(this.shootVector.heading() - 0.05);
@@ -123,7 +122,7 @@ export default class Player extends InputHandler {
     }
 
     this.frictionForce();
-    this.position = this.position.add(this.vel).setMinLimit(new Vector(this.size, this.size)).setMaxLimit(new Vector(consts.CANVAS_WIDTH - this.size, consts.CANVAS_HEIGHT - this.size));
+    this.position = this.position.add(this.vel).setMinLimit(new Vector(this.size, this.size)).setMaxLimit(new Vector(CANVAS_WIDTH - this.size, CANVAS_HEIGHT - this.size));
 
     this.draw();
   }

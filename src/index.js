@@ -1,7 +1,7 @@
 import Assets from './Assets';
 import Background from './Background';
 import ChangeOrientation from './ChangeOrientation';
-import consts from './consts';
+import { PORTRAIT_ORIENTATION } from './consts';
 import { getOrientation, isMobile } from './helpers';
 import Menu from './Menu';
 import assetsConfig from './aseetsConfig';
@@ -18,7 +18,7 @@ async function main() {
 
   Background.create().start();
 
-  if (isMobile.any() && getOrientation() === consts.PORTRAIT_ORIENTATION) {
+  if (isMobile.any() && getOrientation() === PORTRAIT_ORIENTATION) {
     ChangeOrientation.create();
     return
   }

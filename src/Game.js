@@ -4,8 +4,7 @@ import AmmoPool from './AmmoPool';
 import Player from './Player';
 import Score from './Score';
 import { createCanvas, isMobile } from './helpers';
-import consts from './consts';
-import Menu from './Menu';
+import { LOCAL_STORAGE_SCORE, CANVAS_HEIGHT, CANVAS_WIDTH } from './consts';
 import PerkPool from './PerkPool';
 
 export default class Game {
@@ -39,7 +38,7 @@ export default class Game {
   }
 
   update() {
-    this.ctx.clearRect(0, 0, consts.CANVAS_WIDTH, consts.CANVAS_HEIGHT);
+    this.ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     this.dynamicElements.forEach(el => el.update());
     this.animation = requestAnimationFrame(this.update.bind(this));
   }
@@ -55,8 +54,8 @@ export default class Game {
       this.ctx.canvas.remove();
       this.joystickLeft.remove();
       this.joystickRight.remove();
-      const currentRecord = parseInt(localStorage.getItem(consts.LOCAL_STORAGE_SCORE));
-      localStorage.setItem(consts.LOCAL_STORAGE_SCORE, currentRecord > this.score.points ? currentRecord : this.score.points);
+      const currentRecord = parseInt(localStorage.getItem(LOCAL_STORAGE_SCORE));
+      localStorage.setItem(LOCAL_STORAGE_SCORE, currentRecord > this.score.points ? currentRecord : this.score.points);
       Game.instance = null;
     }, 20);
   }

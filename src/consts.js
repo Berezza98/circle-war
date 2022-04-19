@@ -1,23 +1,11 @@
-export default {
-  get CANVAS_WIDTH() {
-    return window.innerWidth;
-  },
-  get CANVAS_HEIGHT() {
-    return window.innerHeight;
-  },
-  get PERCENT_WIDTH() {
-    return this.CANVAS_WIDTH / 100;
-  },
-  get PERCENT_HEIGHT() {
-    return this.CANVAS_HEIGHT / 100;
-  },
-  LOCAL_STORAGE_SCORE: 'circle_wars_best_score',
-  PORTRAIT_ORIENTATION: 'PORTRAIT',
-  LANDSCAPE_ORIENTATION: 'LANDSCAPE',
+export const CANVAS_WIDTH = 1920;
+export const CANVAS_HEIGHT = 1080;
+export const LOCAL_STORAGE_SCORE = 'circle_wars_best_score';
+export const PORTRAIT_ORIENTATION = 'PORTRAIT';
+export const LANDSCAPE_ORIENTATION = 'LANDSCAPE';
 
-  PERK_HEALTH: 'PERK_HEALTH',
-  PERK_DOUBLE_BULLET: 'PERK_DOUBLE_BULLET',
-  PERK_ARMOR: 'PERK_ARMOR',
-  PERK_ICE: 'PERK_ICE',
-};
+export const PERK_HEALTH = 'PERK_HEALTH';
+export const PERK_DOUBLE_BULLET = 'PERK_DOUBLE_BULLET';
+export const PERK_ARMOR = 'PERK_ARMOR';
+export const PERK_ICE = 'PERK_ICE';
 

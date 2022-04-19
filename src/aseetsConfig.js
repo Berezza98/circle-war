@@ -1,4 +1,6 @@
-import consts from './consts';
+import {
+  PERK_ARMOR, PERK_HEALTH, PERK_DOUBLE_BULLET, PERK_ICE,
+} from './consts';
 
 import angryImg from './images/angry.png';
 import angryImg2 from './images/angry2.png';
@@ -34,10 +36,10 @@ export const enemies = {
 };
 
 export const perks = {
-  [consts.PERK_HEALTH]: healthPerkImg,
-  [consts.PERK_DOUBLE_BULLET]: doubleBulletPerkImg,
-  [consts.PERK_ARMOR]: armorPerkImg,
-  [consts.PERK_ICE]: icePerkImg,
+  [PERK_HEALTH]: healthPerkImg,
+  [PERK_DOUBLE_BULLET]: doubleBulletPerkImg,
+  [PERK_ARMOR]: armorPerkImg,
+  [PERK_ICE]: icePerkImg,
 };
 
 export default {

@@ -1,6 +1,5 @@
 import Assets from "./Assets";
 import { drawCenterImage, isOnTheField } from "./helpers";
-import consts from "./consts";
 
 export default class Ammo {
   constructor(ctx, player, options) {

@@ -1,20 +1,23 @@
 import { drawCenterImage, getRandom, getRandomFromArray } from "./helpers";
 import Vector from "./Vector";
-import consts from "./consts";
+import {
+  PERK_ARMOR, PERK_DOUBLE_BULLET, PERK_HEALTH, PERK_ICE,
+  CANVAS_HEIGHT, CANVAS_WIDTH,
+} from "./consts";
 import Assets from "./Assets";
 
 const possiblePerkType = [
-  consts.PERK_HEALTH,
-  consts.PERK_DOUBLE_BULLET,
-  consts.PERK_ARMOR,
-  consts.PERK_ICE,
+  PERK_HEALTH,
+  PERK_DOUBLE_BULLET,
+  PERK_ARMOR,
+  PERK_ICE,
 ];
 
 export default class Perk {
   constructor(ctx) {
     this.ctx = ctx;
-    this.position = new Vector(getRandom(0, consts.CANVAS_WIDTH), getRandom(0, consts.CANVAS_HEIGHT));
-    this.size = consts.PERCENT_WIDTH * 3;
+    this.position = new Vector(getRandom(0, CANVAS_WIDTH), getRandom(0, CANVAS_HEIGHT));
+    this.size = 40;
     this.opacity = 1;
     this.type = getRandomFromArray(possiblePerkType);
     this.hidden = true;
@@ -30,16 +33,16 @@ export default class Perk {
 
   effect(player) {
     switch (this.type) {
-      case consts.PERK_HEALTH:
+      case PERK_HEALTH:
         player.increaseHealth(10);
         break;
-      case consts.PERK_DOUBLE_BULLET:
+      case PERK_DOUBLE_BULLET:
         player.setSecondGun(true, 30000);
         break;
-      case consts.PERK_ARMOR:
+      case PERK_ARMOR:
         player.setArmor(true, 10000);
         break;
-      case consts.PERK_ICE:
+      case PERK_ICE:
         player.setBullets(true, 15000);
         break;
     }

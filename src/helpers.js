@@ -1,4 +1,4 @@
-import consts from "./consts";
+import { CANVAS_HEIGHT, CANVAS_WIDTH, LANDSCAPE_ORIENTATION, PORTRAIT_ORIENTATION } from "./consts";
 
 export function getRandom(min, max) {
   min = Math.ceil(min);
@@ -7,7 +7,7 @@ export function getRandom(min, max) {
 }
 
 export function isOnTheField({ x, y }) {
-  return x > 0 && x < consts.CANVAS_WIDTH && y > 0 && y < consts.CANVAS_HEIGHT;
+  return x > 0 && x < CANVAS_WIDTH && y > 0 && y < CANVAS_HEIGHT;
 }
 
 export function getRandomFromArray(array) {
@@ -23,8 +23,8 @@ export function getMinMax(origMin, origMax, min, max, value) {
 
 export function createCanvas(className) {
   const canvas = document.createElement('canvas');
-  canvas.height = consts.CANVAS_HEIGHT;
-  canvas.width = consts.CANVAS_WIDTH;
+  canvas.height = CANVAS_HEIGHT;
+  canvas.width = CANVAS_WIDTH;
 
   if (className) {
     canvas.classList.add(className);
@@ -50,9 +50,9 @@ export function drawCenterImage(ctx, image, x, y, width, height) {
 
 export function getOrientation() {
   const angle = window.screen.orientation ? window.screen.orientation.angle : window.orientation
-  if (angle === 0) return consts.PORTRAIT_ORIENTATION;
+  if (angle === 0) return PORTRAIT_ORIENTATION;
 
-  return consts.LANDSCAPE_ORIENTATION;
+  return LANDSCAPE_ORIENTATION;
 }
 
 export const isMobile = {
