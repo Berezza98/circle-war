@@ -31,7 +31,13 @@ export default class Joystick {
     });
 
     this.canvas.addEventListener('touchstart', (e) => {
-      // console.log(e);
+      const rect = e.target.getBoundingClientRect();
+      const x = e.targetTouches[0].pageX - rect.left;
+      const y = e.targetTouches[0].pageY - rect.top;
+
+      this.position = new Vector(x - this.canvas.width / 2, y - this.canvas.height / 2).limit(this.radius - this.innerRadius);
+
+      this.draw();
     });
 
     this.canvas.addEventListener('touchend', () => {
