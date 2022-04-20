@@ -9,4 +9,6 @@ export const PERK_DOUBLE_BULLET = 'PERK_DOUBLE_BULLET';
 export const PERK_ARMOR = 'PERK_ARMOR';
 export const PERK_ICE = 'PERK_ICE';
 export const PERK_MISSILES = 'PERK_MISSILES';
+export const PERK_STRENGTH = 'PERK_STRENGTH';
+export const PERK_BULLET_SPEED = 'PERK_BULLET_SPEED';
 

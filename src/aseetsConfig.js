@@ -1,6 +1,6 @@
 import {
   PERK_ARMOR, PERK_HEALTH, PERK_DOUBLE_BULLET, PERK_ICE,
-  PERK_MISSILES,
+  PERK_MISSILES, PERK_STRENGTH, PERK_BULLET_SPEED,
 } from './consts';
 
 import angryImg from './images/angry.png';
@@ -23,6 +23,8 @@ import doubleBulletPerkImg from './images/double-bullet-perk.png';
 import armorPerkImg from './images/armor-perk.png';
 import icePerkImg from './images/ice-perk.png';
 import missilesPerkImg from './images/missiles-perk.png';
+import strengthPerkImg from './images/strength-perk.png';
+import bulletSpeedPerkImg from './images/bullet-speed-perk.png';
 
 export const enemies = {
   angry: angryImg,
@@ -43,6 +45,8 @@ export const perks = {
   [PERK_ARMOR]: armorPerkImg,
   [PERK_ICE]: icePerkImg,
   [PERK_MISSILES]: missilesPerkImg,
+  [PERK_STRENGTH]: strengthPerkImg,
+  [PERK_BULLET_SPEED]: bulletSpeedPerkImg,
 };
 
 export default {

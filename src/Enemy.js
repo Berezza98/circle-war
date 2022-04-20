@@ -58,7 +58,7 @@ export default class Enemy {
   hit() {
     if (this.isDead) return;
 
-    this.health -= 10;
+    this.health -= this.player.strength;
 
     const options = {
       image: this.image,
@@ -67,6 +67,10 @@ export default class Enemy {
     };
 
     this.partialSystems.push(new PartialSystem(this.ctx, options));
+  }
+
+  kill() {
+    this.health = this.deadHealthLevel;
   }
 
   update() {

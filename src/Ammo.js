@@ -1,5 +1,6 @@
 import Assets from "./Assets";
 import { drawCenterImage, isOnTheField } from "./helpers";
+import Vector from "./Vector";
 
 export default class Ammo {
   constructor(ctx, game, options) {
@@ -7,6 +8,7 @@ export default class Ammo {
     this.game = game;
     this.player = game.player;
     this.active = true;
+    this.speed = this.player.bulletSpeed;
     this.options = Object.assign({}, {
       mode: Ammo.modes.regular,
       iceBullets: false,
@@ -21,7 +23,8 @@ export default class Ammo {
       this.options.mode === Ammo.modes.regular
         ? this.player.sightDirection.normalize()
         : this.player.sightDirection.mult(-1).normalize();
-    this.closestEnemyVector = this.getClosestEnemyVector();
+    this.closestEnemy = this.getClosestEnemy();
+    this.acc = new Vector(0, 0);
   }
 
   static modes = {
@@ -35,16 +38,18 @@ export default class Ammo {
     return isOnTheField(this.position) && this.active;
   }
 
-  getClosestEnemyVector() {
+  get closestEnemyVector() {
+    return this.closestEnemy.position.sub(this.position).normalize();
+  }
+
+  getClosestEnemy() {
     const enemies = this.game.enemyPool.pool;
-    const closest = enemies.reduce((acc, enemy) => {
+    return enemies.reduce((acc, enemy) => {
       if (this.position.sub(enemy.position).mag() <= this.position.sub(acc.position).mag()) {
         return enemy;
       }
       return acc;
     }, enemies[0]);
-
-    return closest.position.sub(this.position).normalize();
   }
 
   remove() {
@@ -52,13 +57,17 @@ export default class Ammo {
   }
 
   update() {
-    if (this.options.missilesBullets) {
-      this.vel = this.vel.add(this.closestEnemyVector).setMag(2);
+    if (this.options.missilesBullets && !this.closestEnemy.isDead) {
+      this.acc = this.acc.add(this.closestEnemyVector);
     }
 
+    this.vel = this.vel.add(this.acc).setMag(this.options.missilesBullets ? this.speed + 5 : this.speed);
     this.position = this.position.add(this.vel);
 
     this.draw();
+
+    // set acc to 0,0
+    this.acc = new Vector(0, 0);
   }
 
   draw() {
@@ -66,7 +75,7 @@ export default class Ammo {
 
     this.ctx.save();
     this.ctx.translate(x, y);
-    this.ctx.rotate(this.options.missilesBullets ? this.closestEnemyVector.heading() : this.vel.heading());
+    this.ctx.rotate(this.vel.heading());
     const ammoImg = this.options.iceBullets ? Assets.images.iceBullet : Assets.images.bullet;
     drawCenterImage(this.ctx, ammoImg, 0, 0, Ammo.size * 2, Ammo.size * 2);
     this.ctx.restore();

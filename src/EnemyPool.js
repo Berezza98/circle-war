@@ -19,7 +19,16 @@ export default class EnemyPool {
 
   checkCollision() {
     const { position: playerPosition, size: playerSize } = this.player;
-    const collisioned = this.pool.filter(enemy => playerPosition.sub(enemy.position).mag() <= enemy.size + playerSize);
+    const collisioned = this.pool.filter(enemy => {
+      const needToDelete = playerPosition.sub(enemy.position).mag() <= enemy.size + playerSize;
+      if (needToDelete) {
+        enemy.kill();
+        return true;
+      }
+
+      return false;
+    });
+
     this.pool = this.pool.filter(enemy => {
       return !enemy.isDead && (playerPosition.sub(enemy.position).mag() > enemy.size + playerSize);
     });

@@ -15,6 +15,8 @@ export default class Player extends InputHandler {
     this.shootVector = new Vector(0, 1);
     this.vel = new Vector(0, 0);
     this.health = 100;
+    this.strength = 10;
+    this.bulletSpeed = 2;
     this.joystickLeft = game.joystickLeft;
     this.joystickRight = game.joystickRight;
     this.secondGunAvailable = false;
@@ -57,8 +59,20 @@ export default class Player extends InputHandler {
     }, time);
   }
 
+  increaseBulletSpeed(value) {
+    if (typeof value !== 'number') throw Error('Expected number argument, but got: ', typeof value);
+
+    this.bulletSpeed += value;
+  }
+
+  increaseStrength(value) {
+    if (typeof value !== 'number') throw Error('Expected number argument, but got: ', typeof value);
+
+    this.strength += value;
+  }
+
   increaseHealth(value) {
-    if (!value) throw Error('Expected number argument, but got: ', typeof value);
+    if (typeof value !== 'number') throw Error('Expected number argument, but got: ', typeof value);
 
     this.health += value;
   }
