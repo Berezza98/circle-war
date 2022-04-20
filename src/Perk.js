@@ -20,19 +20,19 @@ const possiblePerkType = [
 export default class Perk {
   constructor(ctx) {
     this.ctx = ctx;
-    this.position = new Vector(getRandom(0, CANVAS_WIDTH), getRandom(0, CANVAS_HEIGHT));
     this.size = 40;
+    this.position = new Vector(getRandom(0, CANVAS_WIDTH - this.size / 2), getRandom(0, CANVAS_HEIGHT - this.size / 2));
     this.opacity = 1;
     this.type = getRandomFromArray(possiblePerkType);
     this.hidden = true;
 
     setTimeout(() => {
       this.hidden = false;
-    }, getRandom(10, 200) * 100);
+    }, getRandom(150, 300) * 100);
   }
 
-  isActive() {
-    return this.opacity > 0;
+  get isActive() {
+    return this.opacity > 0.2;
   }
 
   effect(game) {
@@ -66,7 +66,7 @@ export default class Perk {
   update() {
     if (this.hidden) return;
  
-    if (this.opacity > 0) {
+    if (this.opacity > 0.2) {
       this.opacity -= 0.001;
     }
 
