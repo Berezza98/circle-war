@@ -23,8 +23,8 @@ export default class Menu {
 
   static instance = null;
 
-  static create() {
-    Game.create().stop();
+  static async create() {
+    await Game.create().stop();
     if (!Menu.instance) {
       Menu.instance = new Menu();
     }

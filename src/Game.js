@@ -48,15 +48,18 @@ export default class Game {
   }
 
   stop() {
-    // Stop on next frame
-    setTimeout(() => {
-      cancelAnimationFrame(this.animation);
-      this.ctx.canvas.remove();
-      this.joystickLeft.remove();
-      this.joystickRight.remove();
-      const currentRecord = parseInt(localStorage.getItem(LOCAL_STORAGE_SCORE));
-      localStorage.setItem(LOCAL_STORAGE_SCORE, currentRecord > this.score.points ? currentRecord : this.score.points);
-      Game.instance = null;
-    }, 20);
+    return new Promise((res, rej) => {
+      // Stop on next frame
+      setTimeout(() => {
+        cancelAnimationFrame(this.animation);
+        this.ctx.canvas.remove();
+        this.joystickLeft.remove();
+        this.joystickRight.remove();
+        const currentRecord = parseInt(localStorage.getItem(LOCAL_STORAGE_SCORE));
+        localStorage.setItem(LOCAL_STORAGE_SCORE, currentRecord > this.score.points ? currentRecord : this.score.points);
+        Game.instance = null;
+        res();
+      }, 20);
+    })
   }
 }

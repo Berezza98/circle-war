@@ -77,10 +77,10 @@ export default class Player extends InputHandler {
     this.health += value;
   }
 
-  hit(value) {
+  async hit(value) {
     if (this.health <= 10) {
-      this.game.stop();
-      Menu.create();
+      await this.game.stop();
+      return Menu.create();
     }
 
     this.health -= value * 10;

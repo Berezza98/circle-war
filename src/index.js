@@ -23,7 +23,7 @@ async function main() {
     return
   }
 
-  Menu.create();
+  await Menu.create();
 }
 
 window.addEventListener("orientationchange", main);
