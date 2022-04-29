@@ -4,6 +4,7 @@ import Assets from './Assets';
 import { drawCenterImage, isMobile } from './helpers';
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from './consts';
 import Menu from './Menu';
+import Gamepad from './Gamepad';
 
 export default class Player extends InputHandler {
   constructor(game) {
@@ -11,6 +12,7 @@ export default class Player extends InputHandler {
 
     this.ctx = game.ctx;
     this.game = game;
+    this.gamepad = new Gamepad();
     this.position = new Vector(this.ctx.canvas.width / 2, this.ctx.canvas.height / 2);
     this.shootVector = new Vector(0, 1);
     this.vel = new Vector(0, 0);
@@ -120,6 +122,14 @@ export default class Player extends InputHandler {
     if (isMobile.any()) {
       this.vel = this.vel.add(this.joystickLeft.data.mult(speed));
       this.shootVector = Vector.fromAngle(this.joystickRight.data.heading());
+    }
+
+    if (this.gamepad.canUse) {
+      this.vel = this.vel.add(this.gamepad.leftAxes.mult(speed));
+
+      if (this.gamepad.rightAxes.mag() > 0.8) {
+        this.shootVector = Vector.fromAngle(this.gamepad.rightAxes.heading());
+      }
     }
 
     this.frictionForce();
