@@ -1,9 +1,14 @@
+import EveneEmitter from "./EventEmitter";
 import Vector from "./Vector";
 
-export default class Gamepad {
+export default class Gamepad extends EveneEmitter {
   constructor() {
+    super();
+
     this.controller = null;
     this.addGamepad();
+
+    this.addHandlers();
   }
 
   static AXES = {
@@ -23,6 +28,22 @@ export default class Gamepad {
 
   get rightAxes() {
     return new Vector(this.axesPosition(Gamepad.AXES.rightHorizontal), this.axesPosition(Gamepad.AXES.rightVertical));
+  }
+
+  addHandlers() {
+    const haveEvents = 'GamepadEvent' in window;
+    const haveWebkitEvents = 'WebKitGamepadEvent' in window;
+
+    if (haveEvents) {
+      window.addEventListener("gamepadconnected", this.connectHandler.bind(this));
+    } else if (haveWebkitEvents) {
+      window.addEventListener("webkitgamepadconnected", this.connectHandler.bind(this));
+    }
+  }
+
+  connectHandler() {
+    this.emit('gamepadAdded');
+    this.addGamepad();
   }
 
   addGamepad() {

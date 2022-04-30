@@ -6,10 +6,12 @@ import Score from './Score';
 import { createCanvas, isMobile } from './helpers';
 import { LOCAL_STORAGE_SCORE, CANVAS_HEIGHT, CANVAS_WIDTH } from './consts';
 import PerkPool from './PerkPool';
+import Gamepad from './Gamepad';
 
 export default class Game {
   constructor() {
     this.ctx = createCanvas('main');
+    this.gamepad = new Gamepad();
     this.joystickLeft = new Joystick({ className: 'joystick-left', size: 200, removeLastValue: true });
     this.joystickRight = new Joystick({ className: 'joystick-right', size: 200 });
     this.score = new Score(this);
@@ -18,11 +20,6 @@ export default class Game {
     this.ammoPool = new AmmoPool(this);
     this.perkPool = new PerkPool(this);
     this.animation = null;
-
-    if (isMobile.any()) {
-      this.joystickLeft.append(document.body);
-      this.joystickRight.append(document.body);
-    }
 
     this.dynamicElements = [this.player, this.enemyPool, this.ammoPool, this.score, this.perkPool];
   }
@@ -44,6 +41,11 @@ export default class Game {
   }
 
   start() {
+    if (isMobile.any() && !this.gamepad.canUse) {
+      this.joystickLeft.append(document.body);
+      this.joystickRight.append(document.body);
+    }
+
     this.update();
   }
 

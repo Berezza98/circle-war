@@ -4,6 +4,7 @@ import { createEl } from "./helpers";
 
 export default class Menu {
   constructor() {
+    this.gamepad = Game.create().gamepad;
     this.parent = createEl('div', 'menu');
     this.startBtn = createEl('button', 'start-btn');
     this.startBtn.innerText = 'Start Game';
@@ -14,6 +15,10 @@ export default class Menu {
       scoreTitle.innerText = `Best Score: ${this.bestScore}`;
       this.parent.appendChild(scoreTitle);
     }
+
+    this.gamepadTitle = createEl('div', 'gamepad-title');
+    this.gamepadTitle.innerText = this.gamepad.canUse ? 'Gamepad controller connected!' : 'Please use Gamepad controller to use it!';
+    this.parent.appendChild(this.gamepadTitle);
 
     this.parent.appendChild(this.startBtn);
     document.body.appendChild(this.parent);
@@ -29,7 +34,12 @@ export default class Menu {
       Menu.instance = new Menu();
     }
 
+    Game.create(); // create new game instance
     return Menu.instance;
+  }
+
+  changeGamepadTitle() {
+    this.gamepadTitle.innerText = 'Gamepad controller connected!';
   }
 
   addListeners() {
@@ -38,6 +48,8 @@ export default class Menu {
 
       Game.create().start();
     });
+
+    this.gamepad.on('gamepadAdded', this.changeGamepadTitle.bind(this));
   }
 
   static remove() {

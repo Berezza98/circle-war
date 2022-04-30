@@ -4,7 +4,6 @@ import Assets from './Assets';
 import { drawCenterImage, isMobile } from './helpers';
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from './consts';
 import Menu from './Menu';
-import Gamepad from './Gamepad';
 
 export default class Player extends InputHandler {
   constructor(game) {
@@ -12,7 +11,7 @@ export default class Player extends InputHandler {
 
     this.ctx = game.ctx;
     this.game = game;
-    this.gamepad = new Gamepad();
+    this.gamepad = game.gamepad;
     this.position = new Vector(this.ctx.canvas.width / 2, this.ctx.canvas.height / 2);
     this.shootVector = new Vector(0, 1);
     this.vel = new Vector(0, 0);
