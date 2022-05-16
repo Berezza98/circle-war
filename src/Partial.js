@@ -11,12 +11,14 @@ export default class Partial {
     this.opacity = 1;
   }
 
-  update() {
+  update(deltaTime) {
+    const opacityStep = 0.01 * deltaTime;
+    
     if (this.opacity > 0) {
-      this.opacity = this.opacity - 0.01 <= 0 ? 0 : this.opacity - 0.01;
+      this.opacity = this.opacity - opacityStep <= 0 ? 0 : this.opacity - opacityStep;
     }
 
-    this.position = this.position.add(this.dir);
+    this.position = this.position.add(this.dir.mult(deltaTime));
 
     this.draw();
   }

@@ -4,11 +4,16 @@ import AmmoPool from './AmmoPool';
 import Player from './Player';
 import Score from './Score';
 import { createCanvas, isMobile } from './helpers';
-import { LOCAL_STORAGE_SCORE, CANVAS_HEIGHT, CANVAS_WIDTH } from './consts';
+import {
+  LOCAL_STORAGE_SCORE, CANVAS_HEIGHT, CANVAS_WIDTH,
+  REGULAR_FRAME_RATE_TIME,
+} from './consts';
 import PerkPool from './PerkPool';
 import Gamepad from './Gamepad';
 
 export default class Game {
+  frameTime;
+
   constructor() {
     this.ctx = createCanvas('main');
     this.gamepad = new Gamepad();
@@ -35,8 +40,12 @@ export default class Game {
   }
 
   update() {
+    const deltaTime = Date.now() - (this.frameTime || Date.now());
+
     this.ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-    this.dynamicElements.forEach(el => el.update());
+    this.dynamicElements.forEach(el => el.update(deltaTime / REGULAR_FRAME_RATE_TIME));
+
+    this.frameTime = Date.now();
     this.animation = requestAnimationFrame(this.update.bind(this));
   }
 

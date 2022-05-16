@@ -56,9 +56,9 @@ export default class Ammo {
     this.active = false;
   }
 
-  update() {
+  update(deltaTime) {
     if (this.options.missilesBullets && !this.closestEnemy.isDead) {
-      this.acc = this.acc.add(this.closestEnemyVector);
+      this.acc = this.acc.add(this.closestEnemyVector.mult(deltaTime));
     }
 
     this.vel = this.vel.add(this.acc).setMag(this.options.missilesBullets ? this.speed + 5 : this.speed);

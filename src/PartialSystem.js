@@ -15,8 +15,8 @@ export default class PartialSystem {
     }
   }
 
-  update() {
+  update(deltaTime) {
     this.partials = this.partials.filter(partial => partial.opacity > 0);
-    this.partials.forEach(partial => partial.update());
+    this.partials.forEach(partial => partial.update(deltaTime));
   }
 }

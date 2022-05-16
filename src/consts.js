@@ -1,3 +1,5 @@
+export const REGULAR_FRAME_RATE_TIME = 16;
+
 export const CANVAS_WIDTH = 1920;
 export const CANVAS_HEIGHT = 1080;
 export const LOCAL_STORAGE_SCORE = 'circle_wars_best_score';

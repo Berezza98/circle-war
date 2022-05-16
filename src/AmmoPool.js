@@ -72,13 +72,13 @@ export default class AmmoPool {
     });
   }
 
-  update() {
+  update(deltaTime) {
     this.checkHit();
 
     this.addAmmo();
 
     this.pool = this.pool.filter(ammo => ammo.isActive);
 
-    this.pool.forEach(ammo => ammo.update());
+    this.pool.forEach(ammo => ammo.update(deltaTime));
   }
 }

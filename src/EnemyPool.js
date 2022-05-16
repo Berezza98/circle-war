@@ -47,9 +47,9 @@ export default class EnemyPool {
     }
   }
 
-  update() {
+  update(deltaTime) {
     this.checkCollision();
 
-    this.pool.forEach(enemy => enemy.update());
+    this.pool.forEach(enemy => enemy.update(deltaTime));
   }
 }

@@ -73,12 +73,12 @@ export default class Enemy {
     this.health = this.deadHealthLevel;
   }
 
-  update() {
+  update(deltaTime) {
     if (this.hidden) return;
  
-    this.position = this.position.add(this.isFreezed ? new Vector(0, 0) : this.vel);
+    this.position = this.position.add(this.isFreezed ? new Vector(0, 0) : this.vel.mult(deltaTime));
 
-    this.partialSystems.forEach(ps => ps.update());
+    this.partialSystems.forEach(ps => ps.update(deltaTime));
     this.draw();
   }
 

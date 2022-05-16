@@ -91,15 +91,16 @@ export default class Player extends InputHandler {
     this.vel = this.vel.mult(0.9);
   }
 
-  update() {
-    const speed = 1;
+  update(deltaTime) {
+    const speed = 1 * deltaTime;
+    const angleSpeed = 0.05 * deltaTime;
 
     if (this.keyboard.leftActive) {
-      this.shootVector = Vector.fromAngle(this.shootVector.heading() - 0.05);
+      this.shootVector = Vector.fromAngle(this.shootVector.heading() - angleSpeed);
     }
 
     if (this.keyboard.rightActive) {
-      this.shootVector = Vector.fromAngle(this.shootVector.heading() + 0.05);
+      this.shootVector = Vector.fromAngle(this.shootVector.heading() + angleSpeed);
     }
 
     if (this.keyboard.aActive) {
@@ -132,7 +133,9 @@ export default class Player extends InputHandler {
     }
 
     this.frictionForce();
-    this.position = this.position.add(this.vel).setMinLimit(new Vector(this.size, this.size)).setMaxLimit(new Vector(CANVAS_WIDTH - this.size, CANVAS_HEIGHT - this.size));
+    this.position = this.position.add(this.vel)
+      .setMinLimit(new Vector(this.size, this.size))
+      .setMaxLimit(new Vector(CANVAS_WIDTH - this.size, CANVAS_HEIGHT - this.size));
 
     this.draw();
   }
