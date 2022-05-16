@@ -17,7 +17,7 @@ export default class Menu {
     }
 
     this.gamepadTitle = createEl('div', 'gamepad-title');
-    this.gamepadTitle.innerText = this.gamepad.canUse ? 'Gamepad controller connected!' : 'Please use Gamepad controller to use it!';
+    this.gamepadTitle.innerText = this.gamepad.canUse ? 'Gamepad controller connected!' : 'Please click on Gamepad controller to use it!';
     this.parent.appendChild(this.gamepadTitle);
 
     this.parent.appendChild(this.startBtn);
